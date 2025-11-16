@@ -850,8 +850,8 @@ function Layout() {
     <div className="min-h-screen bg-black text-white font-sans"
          style = {{
            backgroundImage: `
-           linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px),
-           linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px)
+           linear-gradient(to right, rgba(255,255,255,0.12) 1px, transparent 1px),
+           linear-gradient(to bottom, rgba(255,255,255,0.12) 1px, transparent 1px)
            `,
            backgroundSize: "3rem 3rem", // Grid size
          }}>
