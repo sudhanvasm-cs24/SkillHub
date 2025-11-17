@@ -1,70 +1,56 @@
 import React, { useState, useEffect } from 'react';
-// NEW: Import react-slick
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
+import { BrowserRouter, Routes, Route, Link, useNavigate, useParams, Outlet, useLocation, useOutletContext } from 'react-router-dom';
+import * as LucideIcons from 'lucide-react';
 
-// NEW: Import React Router components
-import { 
-  BrowserRouter, Routes, Route, Link, useNavigate, 
-  useParams, Outlet, useLocation, useOutletContext
-} from 'react-router-dom';
-import { 
-  BookOpen, Map, Home, Youtube, Brain, Shield, Database, Code, Server, 
-  Network, Lock, Sigma, User, LogIn, UserPlus, Info, ChartNoAxesCombined, TvMinimalPlay,
-  ArrowLeft, ExternalLink, Square, CheckSquare, Cpu, ListCheck, CodeXml, ArrowRight, BookmarkCheck,
-  Loader, Puzzle, LockKeyhole, Calculator, MonitorCloud, SquareTerminal, BrainCircuit, ChartBarStacked,
-  Bot, Cloudy, HouseWifi, Gamepad, ShieldAlert, CircuitBoard, Blocks, ChevronLeft, ChevronRight
-} from 'lucide-react';
-
-// --- Icon Mapping ---
-const icons = {
-  BookOpen, Map, Home, Youtube, Brain, Shield, Database, Code, Server, 
-  Network, Lock, Sigma, User, LogIn, UserPlus, Info, ChartNoAxesCombined, TvMinimalPlay,
-  ArrowLeft, ExternalLink, Square, CheckSquare, Cpu, ListCheck, CodeXml, ArrowRight, BookmarkCheck,
-  Loader, Puzzle, LockKeyhole, Calculator, MonitorCloud, SquareTerminal, BrainCircuit, ChartBarStacked,
-  Bot, Cloudy, HouseWifi, Gamepad, ShieldAlert, CircuitBoard, Blocks, ChevronLeft, ChevronRight
+// --- Configuration & Shared Styles ---
+const icons = { ...LucideIcons }; // Allow string-based icon lookup
+const commonStyles = {
+  card: "bg-gray-900 rounded-3xl p-6 border border-gray-800 shadow-lg transition-all",
+  cardHover: "hover:scale-105 hover:shadow-blue-500/30",
+  btnPrimary: "bg-blue-500 text-white rounded-full hover:bg-blue-800 transition-all duration-300 shadow-lg",
+  input: "w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-3xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
 };
 
+// --- Custom Arrows for react-slick ---
+const SlickArrow = ({ onClick, direction }) => {
+  const Icon = direction === 'left' ? LucideIcons.ChevronLeft : LucideIcons.ChevronRight;
+  const pos = direction === 'left' ? 'left-4' : 'right-4';
+  return (
+    <div className={`absolute top-1/2 ${pos} -translate-y-1/2 z-10 cursor-pointer bg-white/10 rounded-full p-2 text-white hover:bg-white/20`} onClick={onClick}>
+      <Icon className="h-6 w-6" />
+    </div>
+  );
+};
 
-// --- Testimonial Data ---
+// Settings for the react-slick carousel
+  const Settings = {
+    dots: true, infinite: true, speed: 1000, slidesToShow: 3, slidesToScroll: 1, autoplay: true, autoplaySpeed: 4000, 
+    pauseOnHover: true, nextArrow: <SlickArrow direction="right"/>, prevArrow: <SlickArrow direction="left"/>,
+    swipe: false, drag: false
+  };
+
+// --- Data ---
 const reviews = [
-  {
-    name: "Sudhanva S M",
-    img: "/Images/ml.jpg",
-    course: "Machine Learning",
-    quote: "This roadmap helped me understand ML and build models."
-  },
-  {
-    name: "Sumant Shridhar",
-    img: "/Images/web.jpg",
-    course: "Web development",
-    quote: "I understood the concepts clearly & built my first portfolio website."
-  },
-  { 
-    name: "Subraveti Sathvik", 
-    img: "/Images/ai.jpg",
-    course: "Artificial Intelligence", 
-    quote: "I learned AI concepts well and created a chatbot." 
-  },
-  { 
-    name: "Srihari S Rao", 
-    img: "/Images/cs.jpg",
-    course: "Cyber Security", 
-    quote: "I learned essential security concepts and built my first analyzer." 
-  }
+  { name: "Sudhanva S M", img: "/Images/sudhanva.png", course: "Machine Learning", quote: "This roadmap helped me understand ML and build models." },
+  { name: "Sumant Shridhar", img: "/Images/sumant.jpeg", course: "Web development", quote: "I understood the concepts clearly & built my first portfolio website." },
+  { name: "Subraveti Sathvik", img: "/Images/sathvik.jpeg", course: "Artificial Intelligence", quote: "I learned AI concepts well and created a chatbot." },
+  { name: "Srihari S Rao", img: "/Images/srihari.jpeg", course: "Cyber Security", quote: "I learned essential security concepts and built my first analyzer." }
 ];
 
 function ScrollToTop(){
   useEffect(() => {
       window.scrollTo(0, 0)
-        }, [])
+        }, []);
 }
+
 // --- Components ---
 function LoadingSpinner() {
   return (
     <div className="flex flex-col justify-center items-center h-[60vh] text-white">
-      <Loader className="h-16 w-16 animate-spin text-blue-400" />
+      <LucideIcons.Loader className="h-16 w-16 animate-spin text-blue-400" />
       <p className="text-lg text-gray-300 mt-4">Loading Content...</p>
     </div>
   );
@@ -74,299 +60,161 @@ function LoadingSpinner() {
  * Navigation Bar Component
  */
 function Navbar() {
-  const location = useLocation(); // Hook to get the current URL path
-  const activePage = location.pathname; // e.g., "/", "/roadmaps"
+  const {pathname} = useLocation(); // Hook to get the current URL path
 
   const navItems = [
-    { id: '/', label: 'Home', icon: Home },
-    { id: '/roadmaps', label: 'Roadmaps', icon: Map },
-    { id: '/learning', label: 'Learning', icon: BookOpen },
-    { id: '/about', label: 'About', icon: Info },
+    { id: '/', label: 'Home', icon: 'Home' },
+    { id: '/roadmaps', label: 'Roadmaps', icon: 'Map' },
+    { id: '/learning', label: 'Learning', icon: 'BookOpen' },
+    { id: '/about', label: 'About', icon: 'Info' },
   ];
 
   return (
-    <nav className = "fixed bg-gray-800 flex justify-between items-center gap-16 py-3 px-10 left-1/2 -translate-x-[50%] top-[20px] rounded-full backdrop-blur-md bg-opacity-70 text-white shadow-2xl z-[100] border border-gray-700">
-      {/* Logo and Title */}
-      <Link to="/" className="flex items-center space-x-2 px-4 py-2 cursor-pointer">
-        <BookOpen className="flex items-center translate-y-0.5 h-8 w-8  text-blue-400" />
-        {/* FIXED: Renamed to CS PathFinder */}
-        <span className="text-2xl font-bold text-white">SkillHub</span>
+    <nav className="fixed bg-gray-800 flex justify-between items-center gap-20 py-3 px-10 left-1/2 -translate-x-1/2 top-[20px] rounded-full backdrop-blur-lg text-white shadow-2xl z-[100] border border-gray-700">
+      <Link to="/" className="flex items-center space-x-2 text-2xl font-bold">
+        <LucideIcons.BookOpen className="h-8 w-8 text-blue-400" /> <span>SkillHub</span>
       </Link>
-
-      {/* Main Navigation Links */}
       <div className="hidden md:flex space-x-4">
-        {navItems.map((item) => (
-          <Link
-            key={item.id}
-            to={item.id}
-            className={`flex items-center space-x-3 px-4 py-2 rounded-3xl transition-all duration-200 font-medium ${
-              // Check if path is active (e.g., /roadmaps or /roadmaps/web)
-              (activePage.startsWith(item.id) && item.id !== '/') || (activePage === item.id)
-                ? 'bg-blue-500 text-white shadow-md'
-                : 'text-gray-300 hover:bg-gray-700 hover:text-white'
-            }`}
-          >
-            <item.icon className="h-7 w-7" />
-            <span>{item.label}</span>
-          </Link>
-        ))}
+        {navItems.map(({ id, label, icon }) => {
+          const Icon = icons[icon];
+          const isActive = (pathname.startsWith(id) && id !== '/') || pathname === id;
+          return (
+            <Link key={id} to={id} className={`flex items-center space-x-2 px-4 py-2 rounded-3xl transition-all ${isActive ? 'bg-blue-500 shadow-md' : 'text-gray-300 hover:bg-gray-700'}`}>
+              <Icon className="h-5 w-5" /> <span>{label}</span>
+            </Link>
+          );
+        })}
       </div>
-
-      {/* Auth & Profile Buttons */}
-      <div className="flex items-center space-x-5">
-        <Link
-          to="/login"
-          className="flex items-center space-x-2 px-5 py-3 rounded-3xl text-gray-300 hover:bg-gray-700 hover:text-white transition-all duration-200"
-        >
-          <LogIn className="h-5 w-5" />
-          <span className="hidden sm:inline">Login</span>
-        </Link>
-        <Link
-          to="/register"
-          className="flex items-center space-x-2 px-4 py-2 rounded-3xl bg-blue-500 text-white hover:bg-blue-800 transition-all duration-200 shadow-md"
-        >
-          <UserPlus className="h-5 w-5" />
-          <span className="hidden sm:inline">Register</span>
-        </Link>
-        <Link
-          to="/profile"
-          className="p-2 rounded-full text-gray-300 hover:bg-gray-700 hover:text-white"
-          title="Profile"
-        >
-          <User className="h-5 w-5" />
-        </Link>
+      <div className="flex items-center space-x-4">
+        <Link to="/login" className="text-gray-300 hover:text-white flex items-center gap-2"><LucideIcons.LogIn className="h-6 w-6" /> Login</Link>
+        <Link to="/register" className={`${commonStyles.btnPrimary} px-4 py-2 flex items-center gap-2`}><LucideIcons.UserPlus className="h-6 w-6" /> Register</Link>
+        <Link to="/profile" className="p-2 rounded-full hover:bg-gray-700"><LucideIcons.User className="h-6 w-6" /></Link>
       </div>
     </nav>
   );
 }
-
-// --- NEW: Custom Arrows for react-slick ---
-function SlickNextArrow(props) {
-  const { onClick } = props;
-  return (
-    <div
-      className="absolute top-1/2 right-4 -translate-y-1/2 z-10 cursor-pointer bg-white/10 rounded-full p-2 text-white hover:bg-white/20 transition-all"
-      onClick={onClick}
-    >
-      <ChevronRight className="h-6 w-6" />
-    </div>
-  );
-}
-
-function SlickPrevArrow(props) {
-  const { onClick } = props;
-  return (
-    <div
-      className="absolute top-1/2 left-4 -translate-y-1/2 z-10 cursor-pointer bg-white/10 rounded-full p-2 text-white hover:bg-white/20 transition-all"
-      onClick={onClick}
-    >
-      <ChevronLeft className="h-6 w-6" />
-    </div>
-  );
-}
-
-
 /**
  * Home Page Component
  */
 function HomePage() {
-  const navigate = useNavigate(); // Hook for navigation
   ScrollToTop();
-  // Settings for the react-slick carousel
-  const carouselSettings = {
-    dots: true, // Show dots at the bottom
-    infinite: true,
-    speed: 1000,
-    slidesToShow: 3, // Show 3 slides by default
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 4000,
-    pauseOnHover: true,
-    nextArrow: <SlickNextArrow />,
-    prevArrow: <SlickPrevArrow />,
-    // Custom dots
-    appendDots: dots => (
-      <div className="absolute -bottom-10 w-full">
-        <ul className="m-0 flex justify-center space-x-2"> {dots} </ul>
-      </div>
-    ),
-    customPaging: i => (
-      <button className="h-3 w-3 rounded-full bg-gray-800 transition-all hover:bg-gray-400 focus:outline-none"></button>
-    ),
-    // Responsive settings
-    responsive: [
-      {
-        breakpoint: 1024, // for tablets
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-        }
-      },
-      {
-        breakpoint: 640, // for mobile
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1
-        }
-      }
-    ]
-  };
-  // --- End Carousel Logic ---
-
+  const navigate = useNavigate(); // Hook for navigation
 
   return (
     <div className="text-center p-10 flex flex-col items-center justify-center pt-10">
       <h1 className="text-5xl font-extrabold mb-4 text-white">Welcome to SkillHub</h1>
-      <p className="text-xl text-gray-300 max-w-2xl mx-auto mb-8">
+      <p className="text-lg text-gray-300 max-w-2xl mx-auto mb-8">
         Your simple guide to essential Computer Science topics. Explore curated roadmaps,
         learning resources and track your progress.
       </p>
       <div className="flex space-x-4">
         <button
           onClick={() => navigate('/roadmaps')} // Use navigate
-          className="bg-blue-500 text-white px-6 py-3 rounded-full font-semibold text-lg hover:bg-blue-800  transition-all duration-300 shadow-lg"
-        >
+          className={`${commonStyles.btnPrimary} px-6 py-3 font-semibold text-lg`}>
           Explore Roadmaps
         </button>
         <button
           onClick={() => navigate('/learning')} // Use navigate
-          className="bg-blue-500 text-white px-6 py-3 rounded-full font-semibold text-lg hover:bg-blue-800 transition-all duration-300"
-        >
+          className={`${commonStyles.btnPrimary} px-6 py-3 font-semibold text-lg`}>
           Start Learning
         </button>
       </div>
-
+      
       <div className="mt-20 w-full max-w-5xl mx-auto">
         <h2 className="text-3xl font-bold text-white mb-6">Why SkillHub?</h2>
         <div className="grid md:grid-cols-3 gap-8">
-          <div className="bg-gray-900 p-6 rounded-3xl border border-gray-800 shadow-lg">
-            <Map className="h-10 w-10 text-blue-400 mx-auto mb-4" />
-            <h3 className="text-xl font-semibold text-white mb-2">Simple Roadmaps</h3>
-            <p className="text-gray-400">
-              No clutter. Just clear, simple roadmaps for everyone.
-            </p>
+          {[
+            { icon: 'Map', title: "Simple Roadmaps", text: "No clutter. Just clear, simple roadmaps." },
+            { icon: 'TvMinimalPlay', title: "Curated Learning", text: "Direct links to high-quality playlists. No more searching." },
+            { icon: 'ChartNoAxesCombined', title: "Track Progress", text: "Use your profile to visualize how far you've come." }
+          ].map((f, i) => {
+            const Icon = icons[f.icon];
+            return (
+              <div key={i} className={commonStyles.card}>
+                <Icon className="h-10 w-10 text-blue-400 mb-4 md:mx-28 translate-x-1" />
+                <h3 className="text-xl font-semibold text-white mb-2">{f.title}</h3>
+                <p className="text-gray-400">{f.text}</p>
+              </div>
+            )
+          })}
           </div>
-          <div className="bg-gray-900 p-6 rounded-3xl border border-gray-800 shadow-lg">
-            <TvMinimalPlay className="h-10 w-10 text-blue-400 mx-auto mb-4" />
-            <h3 className="text-xl font-semibold text-white mb-2">Curated Learning</h3>
-            <p className="text-gray-400">
-              Direct links to high-quality YouTube playlists. No more searching.
-            </p>
-          </div>
-          <div className="bg-gray-900 p-6 rounded-3xl border border-gray-800 shadow-lg">
-            <ChartNoAxesCombined className="h-10 w-10 text-blue-400 mx-auto mb-4" />
-            <h3 className="text-xl font-semibold text-white mb-2">Track Progress</h3>
-            <p className="text-gray-400">
-              Use your profile to see how far you've come.
-            </p>
-          </div>
-        </div>
       </div>
 
       {/* How to Get Started Section */}
-      <div className="mt-20 w-full max-w-5xl mx-auto text-left">
+      <div className="mt-24 -translate-y-2 w-full max-w-5xl mx-auto text-left">
         <h2 className="text-3xl font-bold text-white mb-8 text-center">How to Get Started?</h2>
         <div className="grid md:grid-cols-3 gap-8">
-          {/* Step 1 */}
-          <div className="bg-gray-900 p-6 rounded-3xl flex items-start space-x-4 shadow-lg">
-            <div className="flex-shrink-0 bg-indigo-500/20 p-3 rounded-full">
-              <ListCheck className="h-8 w-8 text-blue-400" />
-            </div>
-            <div>
-              <h3 className="text-xl font-semibold text-white mb-2">1. Choose a Path</h3>
-              <p className="text-gray-400">
-                Browse our list of CS domains and select a topic you want to learn, from Web Dev to AI.
-              </p>
-            </div>
-          </div>
-          {/* Step 2 */}
-          <div className="bg-gray-900 p-6 rounded-3xl  flex items-start space-x-4 shadow-lg">
-            <div className="flex-shrink-0 bg-indigo-500/20 p-3 rounded-full">
-              <ExternalLink className="h-8 w-8 text-blue-400" />
-            </div>
-            <div>
-              <h3 className="text-xl font-semibold text-white mb-2">2. Follow the Steps</h3>
-              <p className="text-gray-400">
-                Each step includes curated links to high-quality resources like GFG, YouTube, and LeetCode.
-              </p>
-            </div>
-          </div>
-          {/* Step 3 */}
-          <div className="bg-gray-900 p-6 rounded-3xl flex items-start space-x-4 shadow-lg">
-            <div className="flex-shrink-0 bg-indigo-500/20 p-3 rounded-full">
-              <BookmarkCheck className="h-8 w-8 text-blue-400" />
-            </div>
-            <div>
-              <h3 className="text-xl font-semibold text-white mb-2">3. Track Your Progress</h3>
-              <p className="text-gray-400">
-                Check off tasks as you complete them and see your progress bar fill up on your profile page.
-              </p>
-            </div>
-          </div>
+          {[
+            { icon: 'ListCheck', title: "1. Choose a Path", text: "Browse our list of CS domains and select a topic you want to learn, from Web Dev to AI." },
+            { icon: 'ExternalLink', title: "2. Follow Steps", text: "Each step includes curated links to high-quality resources like GFG, YouTube and LeetCode." },
+            { icon: 'BookmarkCheck', title: "3. Track Progress", text: "Check off tasks as you complete them and see your progress bar fill up on your profile page." }
+          ].map((s, i) => {
+            const Icon = icons[s.icon];
+            return (
+              <div key={i} className={`${commonStyles.card} flex items-start space-x-4`}>
+                <div className="bg-indigo-500/20 p-3 rounded-full"><Icon className="h-6 w-6 text-blue-400" /></div>
+                <div><h3 className="text-xl font-semibold text-white">{s.title}</h3><p className="text-gray-400">{s.text}</p></div>
+              </div>
+            )
+          })}
         </div>
       </div>
 
       {/* Featured Roadmap Section */}
-      <div className="mt-20 w-full max-w-5xl mx-auto text-left bg-gray-900 rounded-3xl border border-gray-800 p-8 md:p-12 shadow-2xl">
-        <div className="md:flex items-center justify-between">
-          <div className="md:w-1/2">
-            <h3 className="text-lg font-semibold text-blue-400 mb-2">Featured Roadmap</h3>
-            <h2 className="text-4xl font-bold text-white mb-4">Web Development</h2>
-            <p className="text-gray-400 text-lg mb-6">
-              Start from the ground up. Learn HTML, CSS, JavaScript, React, and Node.js to build modern,
-              full-stack web applications. This is the perfect place to begin your developer journey.
-            </p>
-            <button
-              onClick={() => navigate('/roadmaps/web')} // Use navigate
-              className="flex items-center space-x-2 bg-blue-500 text-white px-6 py-3 rounded-full font-semibold text-lg hover:bg-blue-800 transition-all duration-300 shadow-lg"
-            >
-              <span>View Web Dev Roadmap</span>
-              <ArrowRight className="h-5 w-5" />
-            </button>
-          </div>
-          <div className="hidden md:block md:w-1/3 text-center">
-            <CodeXml className="h-52 w-52 text-blue-400/30" />
-          </div>
-        </div>
-      </div>
+      <div className="mt-16 md:flex items-center justify-between translate-y-3 w-full max-w-5xl mx-auto text-left bg-gray-900 rounded-3xl border border-gray-800 p-8 md:p-12 shadow-2xl">
+  
+  {/* Text Block */}
+  <div className="md:w-7/12 space-y-4">
+    <h3 className="text-lg font-semibold text-blue-400">Featured Roadmap</h3>
+    <h2 className="text-4xl font-bold text-white">Web Development</h2>
+    <p className="text-gray-400 text-lg">
+      Start from the ground up. Learn HTML, CSS, JavaScript, React, and Node.js to build modern,
+      full-stack web applications. This is the perfect place to begin your developer journey.
+    </p>
+    <button
+      onClick={() => navigate('/roadmaps/web')}
+      className={`${commonStyles.btnPrimary} px-6 py-3 font-semibold text-lg flex items-center gap-2 -translate-x-1 translate-y-2`}>
+      <span>View Web Dev Roadmap</span>
+      <LucideIcons.ArrowRight className="h-6 w-6" />
+    </button>
+  </div>
+  <div className="md:w-5/12 text-center mt-8 md:mt-0 md:mx-5">
+    <img src="/Images/web.jpg" alt="Web Dev" className="h-auto w-auto rounded-full" />
+  </div>
+
+</div>
 
       {/* --- Student Testimonials Carousel --- */}
-      <div className="w-full max-w-6xl mx-auto mt-20">
+      <div className="w-full max-w-6xl mx-auto mt-14">
         <h2 className="text-3xl font-bold text-white mb-8 text-center">Student Reviews</h2>
         {/* The slick-container class is used for custom dot styling in index.css */}
         <div className="slick-container">
-          <Slider {...carouselSettings}>
+          <Slider {...Settings}>
             {/* Map over testimonials to create slides */}
             {reviews.map((d, idx) => (
               <div key={idx} className="px-3"> 
                 <div className="bg-gray-900 rounded-3xl border border-gray-800 p-8 h-[375px] flex flex-col items-center text-center">
                   <img src={d.img} alt={d.name} className="h-28 w-28 rounded-full mt-7 object-cover" />
-                  <div className="text-center mt-3">
-                    <p className="text-2xl font-bold text-white"> {d.name} </p>
-                    <p className="font-semibold text-lg text-blue-400">{d.course}</p>
-                  </div> 
-                  <div className="flex flex-col justify-center items-center gap-4 p-4 text-lg px-6 py-3 text-gray-300 font-medium">
-                    <p>"{d.quote}"</p>
-                  </div> 
+                  <h3 className="text-xl font-bold text-white">{d.name}</h3>
+                  <p className="text-blue-400 text-sm mb-4">{d.course}</p>
+                  <p className="text-gray-300 italic">"{d.quote}"</p> 
+                  <p className="text-gray-300 italic">"{d.quote}"</p>
                 </div>
               </div>
             ))}
           </Slider>
         </div>
       </div>
-      {/* --- End Carousel --- */}
-
 
       {/* Call to Action Section */}
-      <div className="mt-20 text-center">
+      <div className="mt-24 text-center -translate-y-3">
         <h2 className="text-3xl font-bold text-white mb-4">Ready to Start?</h2>
-        <p className="text-lg text-gray-300 mb-6">
+        <p className="text-lg text-gray-200 mb-6">
           Jump right into a roadmap or explore a new topic.
         </p>
         <button
           onClick={() => navigate('/roadmaps')} // Use navigate
-          className="bg-blue-500 text-white px-8 py-3 rounded-3xl font-semibold text-lg hover:bg-blue-800 transition-all duration-300 shadow-lg"
-        >
+          className={`${commonStyles.btnPrimary} space-x-4 px-8 py-3 font-semibold text-lg`}>
           See All Roadmaps
         </button>
       </div>
@@ -379,29 +227,53 @@ function HomePage() {
  */
 function AboutPage() {
   ScrollToTop();
+
+  const techStack = [
+    { name: "MongoDB", description: "Database" },
+    { name: "Express.js", description: "Back-End Framework" },
+    { name: "React.js", description: "Front-End Library" },
+    { name: "Node.js", description: "Back-End Runtime" },
+    { name: "Tailwind CSS", description: "Utility-First CSS" },
+    { name: "React Router", description: "Page Navigation" },
+    { name: "Lucide", description: "Icon Pack" },
+    { name: "React Slick", description: "Carousel Component" },
+  ];
+
   return (
     <div className="p-8 max-w-4xl mx-auto">
-      <h2 className="text-4xl font-bold mb-8 mt-1 text-center text-white">About CS PathFinder</h2>
+      <h2 className="text-4xl font-bold mb-8 mt-1 text-center text-white">About SkillHub</h2>
       <div className="bg-gray-900 rounded-3xl shadow-lg p-8 border border-gray-800">
         <p className="text-lg text-gray-300 mb-4">
-          SkillHub is a lightweight, simplified web application designed specifically for college students. 
+          SkillHub was built for one reason: to demystify the world of computer science for college students.
           The goal isn't to be the most comprehensive platform,
           but to be a simple, non-overwhelming starting point.
         </p>
         <p className="text-lg text-gray-300 mb-4">
-          This project demonstrates the fundamentals of a MERN stack application (MongoDB, Express.js, React, Node.js).
-          This frontend is built with React and Tailwind CSS, and it's designed to be simple to understand,
-          modify, and connect to a backend API.
+          This project's goal is to provide a clean, non-distracting, and structured learning experience. It demonstrates a complete
+            MERN stack application, from the database to the UI, all while serving as a genuinely useful tool.
         </p>
         <h3 className="text-2xl font-semibold text-white mt-6 mb-3">Features</h3>
         <ul className="list-disc list-inside text-gray-300 space-y-2">
-          <li>Curated CS domain roadmaps with checkpoints.</li>
-          <li>A learning section with structured learning paths.</li>
-          <li>Page routing handled by `react-router-dom`.</li>
-          <li>Login, register, and profile pages.</li>
-          <li>A clean, responsive, dark-mode UI built with Tailwind CSS.</li>
+          <li>12+ curated roadmaps for high-demand CS domains.</li>
+            <li>10+ structured learning paths for fundamental topics.</li>
+            <li>Interactive checkpoint system to track your progress (WIP).</li>
+            <li>Dynamic page routing using 'react-router-dom'.</li>
+            <li>Full MERN stack (MongoDB, Express, React, Node.js).</li>
+            <li>A clean, responsive, dark-mode UI built with Tailwind CSS.</li>
         </ul>
       </div>
+
+      <h2 className="text-4xl font-bold mb-8 mt-16 -translate-y-3 text-center text-white">Tech Stack Used</h2>
+      <section>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 -translate-y-4">
+          {techStack.map ((tech) => (
+            <div key={tech.name} className="bg-gray-900 p-4 rounded-3xl border border-gray-800 text-center shadow">
+              <h3 className="text-2xl font-semibold text-white">{tech.name}</h3>
+              <p className="mt-2 text-blue-500">{tech.description}</p>
+            </div>
+          ))}
+        </div>
+      </section>
     </div>
   );
 }
@@ -451,13 +323,14 @@ function LearningPage() {
       <h2 className="text-4xl font-bold mb-8 mt-1 text-center text-white">Learning Section</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {learningItems.map((item) => {
-          const IconComponent = icons[item.icon] || BookOpen; // Get icon by name, fallback to BookOpen
+          const IconComponent = icons[item.icon] || LucideIcons.BookOpen; // Get icon by name, fallback to BookOpen
           return (
             <Link
               key={item._id}
               to={`/learning/${item.learningId}`} // Navigate to NEW detail page URL
               className="block bg-gray-900 rounded-3xl shadow-lg p-6 border border-gray-800
-                         transform transition-all duration-300 hover:scale-105 hover:shadow-blue-500/30 group"
+                         transform transition-all duration-300 hover:scale-105 hover:shadow-blue-500/30 group
+                         text-left w-full hover:border-blue-500"
             >
               <div className="flex items-center justify-between mb-4">
                 <IconComponent className="h-10 w-10 text-blue-400" />
@@ -520,7 +393,7 @@ function RoadmapDetailPage() {
         className="flex items-center space-x-2 text-blue-400 font-bold mb-8 -translate-x-44
                    hover:text-blue-300 transition-colors"
       >
-        <ArrowLeft className="h-5 w-5" />
+        <LucideIcons.ArrowLeft className="h-5 w-5" />
         <span>Back</span>
       </button>
 
@@ -548,9 +421,9 @@ function RoadmapDetailPage() {
                   title={isComplete ? "Mark as Incomplete" : "Mark as Complete"}
                 >
                   {isComplete ? (
-                    <CheckSquare className="h-8 w-8 text-green-500" />
+                    <LucideIcons.CheckSquare className="h-8 w-8 text-green-500" />
                   ) : (
-                    <Square className="h-8 w-8 text-gray-800" />
+                    <LucideIcons.Square className="h-8 w-8 text-gray-800" />
                   )}
                 </button>
                 
@@ -572,7 +445,7 @@ function RoadmapDetailPage() {
         </div>
       ) : (
         // Placeholder for roadmaps without data
-        <div className="text-center bg-gray-900 rounded-xl p-8 border border-gray-800">
+        <div className="text-center bg-gray-900 rounded-3xl p-8 border border-gray-800">
           <p className="text-gray-400 text-lg">
             This roadmap is empty. Data will be added soon.
           </p>
@@ -602,7 +475,7 @@ function LearningDetailPage() {
         className="flex items-center space-x-2 text-blue-400 font-bold mb-8 -translate-x-44
                    hover:text-blue-300 transition-colors"
       >
-        <ArrowLeft className="h-5 w-5" />
+        <LucideIcons.ArrowLeft className="h-5 w-5" />
         <span>Back</span>
       </button>
 
@@ -620,7 +493,7 @@ function LearningDetailPage() {
             return (
               <div
                 key={step.id}
-                className="bg-gray-900 shadow-lg rounded-xl p-6 border border-gray-800
+                className="bg-gray-900 shadow-lg rounded-3xl p-6 border border-gray-800
                            flex items-start space-x-4"
               >
                 {/* Checkbox */}
@@ -630,9 +503,9 @@ function LearningDetailPage() {
                   title={isComplete ? "Mark as Incomplete" : "Mark as Complete"}
                 >
                   {isComplete ? (
-                    <CheckSquare className="h-8 w-8 text-green-500" />
+                    <LucideIcons.CheckSquare className="h-8 w-8 text-green-500" />
                   ) : (
-                    <Square className="h-8 w-8 text-gray-800" />
+                    <LucideIcons.Square className="h-8 w-8 text-gray-800" />
                   )}
                 </button>
                 
@@ -697,7 +570,7 @@ function AuthForm({ title, buttonText, isRegister = false }) {
               <input
                 type="email"
                 id="email"
-                className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-3xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder="you@example.com"
               />
             </div>
@@ -708,7 +581,7 @@ function AuthForm({ title, buttonText, isRegister = false }) {
               <input
                 type="password"
                 id="password"
-                className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-3xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder="••••••••"
               />
             </div>
@@ -751,7 +624,7 @@ function ProfilePage() {
       <div className="bg-gray-900 rounded-3xl shadow-lg p-8 border border-gray-800">
         <div className="flex items-center space-x-6 mb-8">
           <div className="w-24 h-24 bg-blue-500 rounded-full flex items-center justify-center">
-            <User className="w-12 h-12 text-white" />
+            <LucideIcons.User className="w-12 h-12 text-white" />
           </div>
           <div>
             <h3 className="text-3xl font-semibold text-white">Student User</h3>
@@ -780,8 +653,11 @@ function ProfilePage() {
  */
 function Footer() {
   return (
-    <footer className="text-center py-6 text-gray-400 border-t border-gray-600 mt-64">
-      SkillHub - Learn smart, follow simple, master more.
+    <footer className="bg-gray-900 text-gray-400 border-t border-gray-800 mt-20 py-12">
+      <div className="text-center">
+        SkillHub - Learn smart, follow simple, master more.
+      </div>
+        
     </footer>
   );
 }
@@ -847,7 +723,7 @@ function Layout() {
   const totalSteps = totalRoadmapSteps + totalLearningSteps;
 
   return (
-    <div className="min-h-screen bg-black text-white font-sans"
+    <div className="min-h-screen bg-black text-white font-sans flex flex-col"
          style = {{
            backgroundImage: `
            linear-gradient(to right, rgba(255,255,255,0.12) 1px, transparent 1px),
@@ -856,7 +732,7 @@ function Layout() {
            backgroundSize: "3rem 3rem", // Grid size
          }}>
       <Navbar />
-      <main className="container mx-auto px-6 py-8 pt-28">
+      <main className="container mx-auto px-6 py-8 pt-28 flex-grow">
         {isLoading ? (
           <LoadingSpinner />
         ) : (
