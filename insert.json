@@ -1,0 +1,507 @@
+[
+  {
+    "title": "Operating Systems",
+    "learningId": "os",
+    "icon": "",
+    "description": "Learn concepts of operating systems including process management, memory, file systems, and concurrency.",
+    "steps": [
+      {
+        "id": 1,
+        "title": "OS Basics",
+        "description": "Introduction to operating systems, types, and functions.",
+        "resources": [
+          { "name": "GeeksforGeeks OS Basics", "url": "https://www.geeksforgeeks.org/introduction-to-operating-system/" },
+          { "name": "TutorialsPoint OS", "url": "https://www.tutorialspoint.com/operating_system/index.htm" },
+          { "name": "YouTube - Neso Academy OS", "url": "https://www.youtube.com/watch?v=26QPDBe-NB8" },
+          { "name": "Operating System Concepts Book", "url": "https://www.os-book.com/" }
+        ],
+        "assignments": [
+          { "name": "List different types of operating systems", "url": "#" },
+          { "name": "Explain OS functions with examples", "url": "#" }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Process & Thread Management",
+        "description": "Learn process life cycle, scheduling algorithms, and multithreading.",
+        "resources": [
+          { "name": "GeeksforGeeks Process Management", "url": "https://www.geeksforgeeks.org/process-scheduling-in-operating-systems/" },
+          { "name": "TutorialsPoint Threads", "url": "https://www.tutorialspoint.com/java/java_multithreading.htm" },
+          { "name": "NPTEL OS Lectures", "url": "https://nptel.ac.in/courses/106/106/106106180/" },
+          { "name": "Operating System Concepts - Chap 3", "url": "https://www.os-book.com/OS9/slide-dir/" }
+        ],
+        "assignments": [
+          { "name": "Implement a basic thread program", "url": "#" },
+          { "name": "Simulate FCFS scheduling algorithm", "url": "#" }
+        ]
+      },
+      {
+        "id": 3,
+        "title": "Memory & File Systems",
+        "description": "Understand memory management, paging, segmentation, and file organization.",
+        "resources": [
+          { "name": "GeeksforGeeks Memory Management", "url": "https://www.geeksforgeeks.org/memory-management-in-operating-system/" },
+          { "name": "TutorialsPoint File Systems", "url": "https://www.tutorialspoint.com/operating_system/os_file_system.htm" },
+          { "name": "OS Concepts Book - Chap 8", "url": "https://www.os-book.com/" }
+        ],
+        "assignments": [
+          { "name": "Simulate page replacement algorithms", "url": "#" },
+          { "name": "Design simple file organization structure", "url": "#" }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Database Management Systems",
+    "learningId": "dbms",
+    "icon": "",
+    "description": "Learn relational databases, SQL, normalization, and transaction management.",
+    "steps": [
+      {
+        "id": 1,
+        "title": "DBMS Basics",
+        "description": "Introduction to DBMS, types of databases, and architecture.",
+        "resources": [
+          { "name": "GeeksforGeeks DBMS", "url": "https://www.geeksforgeeks.org/dbms-tutorial/" },
+          { "name": "TutorialsPoint DBMS", "url": "https://www.tutorialspoint.com/dbms/index.htm" },
+          { "name": "W3Schools SQL Tutorial", "url": "https://www.w3schools.com/sql/" },
+          { "name": "NPTEL Database Systems", "url": "https://nptel.ac.in/courses/106/106/106106160/" }
+        ],
+        "assignments": [
+          { "name": "Draw ER diagram for a sample system", "url": "#" },
+          { "name": "List advantages of relational databases", "url": "#" }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "SQL & Queries",
+        "description": "Learn SQL commands, joins, subqueries, and aggregate functions.",
+        "resources": [
+          { "name": "SQLBolt", "url": "https://sqlbolt.com/" },
+          { "name": "W3Schools SQL Tutorial", "url": "https://www.w3schools.com/sql/" },
+          { "name": "GeeksforGeeks SQL", "url": "https://www.geeksforgeeks.org/sql-tutorial/" },
+          { "name": "Mode SQL Tutorial", "url": "https://mode.com/sql-tutorial/" }
+        ],
+        "assignments": [
+          { "name": "Write queries using SELECT, INSERT, UPDATE, DELETE", "url": "#" },
+          { "name": "Create queries with joins and subqueries", "url": "#" }
+        ]
+      },
+      {
+        "id": 3,
+        "title": "Normalization & Transactions",
+        "description": "Learn normalization, ACID properties, and transaction control.",
+        "resources": [
+          { "name": "GeeksforGeeks Normalization", "url": "https://www.geeksforgeeks.org/database-normalization/" },
+          { "name": "TutorialsPoint Transactions", "url": "https://www.tutorialspoint.com/dbms/dbms_transaction_management.htm" },
+          { "name": "NPTEL DBMS Lectures", "url": "https://nptel.ac.in/courses/106/106/106106160/" }
+        ],
+        "assignments": [
+          { "name": "Normalize a sample database to 3NF", "url": "#" },
+          { "name": "Simulate transaction using SQL commands", "url": "#" }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Computer Architecture",
+    "learningId": "ca",
+    "icon": "",
+    "description": "Learn computer organization, processor design, instruction set architecture, and memory hierarchy.",
+    "steps": [
+      {
+        "id": 1,
+        "title": "Introduction to Computer Architecture",
+        "description": "Learn basic components and functions of a computer system.",
+        "resources": [
+          { "name": "GeeksforGeeks Computer Architecture", "url": "https://www.geeksforgeeks.org/computer-organization-and-architecture-tutorials/" },
+          { "name": "TutorialsPoint Computer Organization", "url": "https://www.tutorialspoint.com/computer_logical_organization/index.htm" },
+          { "name": "NPTEL Computer Organization", "url": "https://nptel.ac.in/courses/106/106/106106182/" }
+        ],
+        "assignments": [
+          { "name": "Draw block diagram of a basic computer", "url": "#" },
+          { "name": "Explain CPU, memory, and I/O components", "url": "#" }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Processor & Instruction Set",
+        "description": "Learn instruction cycle, CPU organization, and addressing modes.",
+        "resources": [
+          { "name": "Computer Architecture Book - Hennessy & Patterson", "url": "https://www.amazon.com/Computer-Architecture-Morgan-Kaufmann/dp/0128119055" },
+          { "name": "GeeksforGeeks CPU Scheduling", "url": "https://www.geeksforgeeks.org/cpu-scheduling-in-operating-systems/" },
+          { "name": "TutorialsPoint Instruction Set", "url": "https://www.tutorialspoint.com/computer_logical_organization/computer_instruction_set.htm" }
+        ],
+        "assignments": [
+          { "name": "List types of instruction formats", "url": "#" },
+          { "name": "Simulate instruction execution for a small program", "url": "#" }
+        ]
+      },
+      {
+        "id": 3,
+        "title": "Memory & I/O",
+        "description": "Understand memory hierarchy, cache, and I/O interfacing.",
+        "resources": [
+          { "name": "GeeksforGeeks Memory Hierarchy", "url": "https://www.geeksforgeeks.org/memory-hierarchy-in-computer-organization/" },
+          { "name": "TutorialsPoint I/O Organization", "url": "https://www.tutorialspoint.com/computer_logical_organization/computer_input_output_organization.htm" },
+          { "name": "NPTEL Lectures on Memory", "url": "https://nptel.ac.in/courses/106/106/106106182/" }
+        ],
+        "assignments": [
+          { "name": "Draw memory hierarchy diagram", "url": "#" },
+          { "name": "Explain cache and virtual memory with examples", "url": "#" }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Computer Networks",
+    "learningId": "cn",
+    "icon": "",
+    "description": "Learn networking concepts, protocols, topologies, and network security.",
+    "steps": [
+      {
+        "id": 1,
+        "title": "Networking Basics",
+        "description": "Understand OSI model, TCP/IP, and network devices.",
+        "resources": [
+          { "name": "GeeksforGeeks Networking", "url": "https://www.geeksforgeeks.org/computer-network-tutorials/" },
+          { "name": "Cisco Networking Basics", "url": "https://www.cisco.com/c/en/us/solutions/small-business/resource-center/networking.html" },
+          { "name": "TutorialsPoint Networking", "url": "https://www.tutorialspoint.com/computer_fundamentals/computer_networking.htm" },
+          { "name": "NPTEL Computer Networks", "url": "https://nptel.ac.in/courses/106/106/106106183/" }
+        ],
+        "assignments": [
+          { "name": "Draw OSI and TCP/IP model", "url": "#" },
+          { "name": "List networking devices and their functions", "url": "#" }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Protocols & Communication",
+        "description": "Learn HTTP, FTP, SMTP, DNS, and packet communication.",
+        "resources": [
+          { "name": "GeeksforGeeks Protocols", "url": "https://www.geeksforgeeks.org/computer-network-protocols/" },
+          { "name": "TutorialsPoint Protocols", "url": "https://www.tutorialspoint.com/data_communication_computer_network/data_communication_computer_network_protocols.htm" },
+          { "name": "NPTEL Networking Lectures", "url": "https://nptel.ac.in/courses/106/106/106106183/" }
+        ],
+        "assignments": [
+          { "name": "Simulate packet sending and receiving", "url": "#" },
+          { "name": "Explain working of HTTP and DNS", "url": "#" }
+        ]
+      },
+      {
+        "id": 3,
+        "title": "Network Security Basics",
+        "description": "Introduction to firewalls, VPNs, encryption, and secure communication.",
+        "resources": [
+          { "name": "GeeksforGeeks Network Security", "url": "https://www.geeksforgeeks.org/network-security/" },
+          { "name": "OWASP Network Security", "url": "https://owasp.org/www-project-top-ten/" },
+          { "name": "NPTEL Cyber Security", "url": "https://nptel.ac.in/courses/106/106/106106186/" }
+        ],
+        "assignments": [
+          { "name": "Set up firewall rules for a small network", "url": "#" },
+          { "name": "Encrypt a message using basic cryptography", "url": "#" }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Algorithms",
+    "learningId": "algorithms",
+    "icon": "",
+    "description": "Learn algorithm design, complexity analysis, and standard algorithmic paradigms.",
+    "steps": [
+      {
+        "id": 1,
+        "title": "Algorithm Basics & Complexity",
+        "description": "Learn big-O notation, time and space complexity, and problem-solving techniques.",
+        "resources": [
+          { "name": "GeeksforGeeks Algorithms", "url": "https://www.geeksforgeeks.org/fundamentals-of-algorithms/" },
+          { "name": "Introduction to Algorithms - Cormen", "url": "https://mitpress.mit.edu/9780262033848/introduction-to-algorithms/" },
+          { "name": "TutorialsPoint Algorithms", "url": "https://www.tutorialspoint.com/data_structures_algorithms/index.htm" }
+        ],
+        "assignments": [
+          { "name": "Analyze time complexity of given algorithms", "url": "#" },
+          { "name": "Compare different sorting algorithms", "url": "#" }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Sorting & Searching",
+        "description": "Implement and understand basic and advanced sorting and searching techniques.",
+        "resources": [
+          { "name": "GeeksforGeeks Sorting Algorithms", "url": "https://www.geeksforgeeks.org/sorting-algorithms/" },
+          { "name": "LeetCode Sorting Problems", "url": "https://leetcode.com/problemset/all/?topicSlugs=sorting" },
+          { "name": "Khan Academy Algorithms", "url": "https://www.khanacademy.org/computing/computer-science/algorithms" }
+        ],
+        "assignments": [
+          { "name": "Implement QuickSort and MergeSort", "url": "#" },
+          { "name": "Implement Binary Search on arrays", "url": "#" }
+        ]
+      },
+      {
+        "id": 3,
+        "title": "Greedy, DP & Graph Algorithms",
+        "description": "Learn dynamic programming, greedy methods, and graph traversal algorithms.",
+        "resources": [
+          { "name": "GeeksforGeeks DP", "url": "https://www.geeksforgeeks.org/dynamic-programming/" },
+          { "name": "GeeksforGeeks Graph Algorithms", "url": "https://www.geeksforgeeks.org/graph-data-structure-and-algorithms/" },
+          { "name": "YouTube - Abdul Bari Algorithms", "url": "https://www.youtube.com/c/AbdulBari" }
+        ],
+        "assignments": [
+          { "name": "Solve DP problems like knapsack, LIS", "url": "#" },
+          { "name": "Implement BFS and DFS on graphs", "url": "#" }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Cryptography",
+    "learningId": "crypto",
+    "icon": "",
+    "description": "Learn encryption, decryption, cryptographic algorithms, and secure communication.",
+    "steps": [
+      {
+        "id": 1,
+        "title": "Introduction to Cryptography",
+        "description": "Basics of cryptography, symmetric vs asymmetric encryption, and keys.",
+        "resources": [
+          { "name": "GeeksforGeeks Cryptography", "url": "https://www.geeksforgeeks.org/cryptography/" },
+          { "name": "TutorialsPoint Cryptography", "url": "https://www.tutorialspoint.com/cryptography/index.htm" },
+          { "name": "Coursera Cryptography Course", "url": "https://www.coursera.org/learn/crypto" }
+        ],
+        "assignments": [
+          { "name": "Encrypt and decrypt messages using basic ciphers", "url": "#" },
+          { "name": "Explain symmetric vs asymmetric encryption", "url": "#" }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Hashing & Digital Signatures",
+        "description": "Learn hash functions, message digest, and digital signatures.",
+        "resources": [
+          { "name": "GeeksforGeeks Hashing", "url": "https://www.geeksforgeeks.org/hashing-data-structure/" },
+          { "name": "TutorialsPoint Digital Signatures", "url": "https://www.tutorialspoint.com/cryptography/digital_signatures.htm" },
+          { "name": "NPTEL Security Lectures", "url": "https://nptel.ac.in/courses/106/106/106106186/" }
+        ],
+        "assignments": [
+          { "name": "Generate hash of a message", "url": "#" },
+          { "name": "Implement digital signature using a library", "url": "#" }
+        ]
+      },
+      {
+        "id": 3,
+        "title": "SSL/TLS & Cryptography Applications",
+        "description": "Learn SSL/TLS, HTTPS, and real-world cryptography applications.",
+        "resources": [
+          { "name": "SSL/TLS Basics", "url": "https://www.cloudflare.com/learning/ssl/" },
+          { "name": "OWASP Cryptography Guidelines", "url": "https://owasp.org/www-project-top-ten/" },
+          { "name": "GeeksforGeeks Cryptography Applications", "url": "https://www.geeksforgeeks.org/applications-of-cryptography/" }
+        ],
+        "assignments": [
+          { "name": "Configure HTTPS for a small web server", "url": "#" },
+          { "name": "Explain SSL handshake process", "url": "#" }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Engineering Mathematics",
+    "learningId": "em",
+    "icon": "",
+    "description": "Learn mathematical concepts essential for engineering including calculus, linear algebra, and differential equations.",
+    "steps": [
+      {
+        "id": 1,
+        "title": "Calculus",
+        "description": "Learn differentiation, integration, limits, and applications.",
+        "resources": [
+          { "name": "Khan Academy Calculus", "url": "https://www.khanacademy.org/math/calculus-1" },
+          { "name": "MIT OCW Calculus", "url": "https://ocw.mit.edu/courses/mathematics/18-01sc-single-variable-calculus-fall-2010/" },
+          { "name": "GeeksforGeeks Calculus", "url": "https://www.geeksforgeeks.org/mathematics/" }
+        ],
+        "assignments": [
+          { "name": "Differentiate and integrate sample functions", "url": "#" },
+          { "name": "Solve applied problems using derivatives", "url": "#" }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Linear Algebra",
+        "description": "Learn matrices, vectors, determinants, and eigenvalues.",
+        "resources": [
+          { "name": "Khan Academy Linear Algebra", "url": "https://www.khanacademy.org/math/linear-algebra" },
+          { "name": "MIT OCW Linear Algebra", "url": "https://ocw.mit.edu/courses/mathematics/18-06-linear-algebra-spring-2010/" },
+          { "name": "GeeksforGeeks Linear Algebra", "url": "https://www.geeksforgeeks.org/linear-algebra/" }
+        ],
+        "assignments": [
+          { "name": "Solve systems of linear equations", "url": "#" },
+          { "name": "Compute eigenvalues and eigenvectors", "url": "#" }
+        ]
+      },
+      {
+        "id": 3,
+        "title": "Differential Equations & Probability",
+        "description": "Learn first-order differential equations, Laplace transform, and probability basics.",
+        "resources": [
+          { "name": "Khan Academy Differential Equations", "url": "https://www.khanacademy.org/math/differential-equations" },
+          { "name": "MIT OCW Probability", "url": "https://ocw.mit.edu/courses/res-6-012-introduction-to-probability-spring-2018/" },
+          { "name": "GeeksforGeeks Probability", "url": "https://www.geeksforgeeks.org/probability/" }
+        ],
+        "assignments": [
+          { "name": "Solve basic differential equations", "url": "#" },
+          { "name": "Calculate probabilities for simple events", "url": "#" }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Software Engineering",
+    "learningId": "se",
+    "icon": "",
+    "description": "Learn software development lifecycle, design patterns, and professional coding practices.",
+    "steps": [
+      {
+        "id": 1,
+        "title": "Programming Fundamentals",
+        "description": "Learn a programming language (C++, Java, or Python) and problem-solving skills.",
+        "resources": [
+          { "name": "GeeksforGeeks Programming", "url": "https://www.geeksforgeeks.org/fundamentals-of-algorithms/" },
+          { "name": "W3Schools Programming Tutorials", "url": "https://www.w3schools.com/" },
+          { "name": "TutorialsPoint Programming", "url": "https://www.tutorialspoint.com/programming_languages/index.htm" }
+        ],
+        "assignments": [
+          { "name": "Solve coding problems on arrays, strings, and loops", "url": "#" },
+          { "name": "Implement basic algorithms like sorting/searching", "url": "#" }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Software Design & Architecture",
+        "description": "Learn OOP, design patterns, and clean code practices.",
+        "resources": [
+          { "name": "Refactoring Guru - Design Patterns", "url": "https://refactoring.guru/design-patterns" },
+          { "name": "Clean Code Book", "url": "https://www.oreilly.com/library/view/clean-code-a/9780136083238/" },
+          { "name": "GeeksforGeeks OOP", "url": "https://www.geeksforgeeks.org/object-oriented-programming-oops-concept-in-java/" }
+        ],
+        "assignments": [
+          { "name": "Implement Singleton, Factory, Observer patterns", "url": "#" },
+          { "name": "Refactor a messy codebase", "url": "#" }
+        ]
+      },
+      {
+        "id": 3,
+        "title": "Version Control & Agile",
+        "description": "Learn Git, GitHub, and Agile development processes.",
+        "resources": [
+          { "name": "Git Docs", "url": "https://git-scm.com/doc" },
+          { "name": "Agile Alliance Resources", "url": "https://www.agilealliance.org/agile101/" },
+          { "name": "TutorialsPoint Git", "url": "https://www.tutorialspoint.com/git/index.htm" }
+        ],
+        "assignments": [
+          { "name": "Work on a small team project using Git", "url": "#" },
+          { "name": "Simulate Agile sprint workflow", "url": "#" }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Shell Scripting",
+    "learningId": "shell",
+    "icon": "",
+    "description": "Learn to automate tasks using shell scripting and command-line tools.",
+    "steps": [
+      {
+        "id": 1,
+        "title": "Shell Basics",
+        "description": "Learn shell commands, pipes, redirection, and environment variables.",
+        "resources": [
+          { "name": "Linux Shell Scripting Tutorial", "url": "https://www.shellscript.sh/" },
+          { "name": "TutorialsPoint Shell", "url": "https://www.tutorialspoint.com/unix/shell_scripting.htm" },
+          { "name": "GeeksforGeeks Shell Scripting", "url": "https://www.geeksforgeeks.org/shell-scripting/" }
+        ],
+        "assignments": [
+          { "name": "Write scripts to automate file operations", "url": "#" },
+          { "name": "Create a script to display system info", "url": "#" }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Loops, Conditions & Functions",
+        "description": "Learn conditional statements, loops, and functions in shell scripts.",
+        "resources": [
+          { "name": "TutorialsPoint Loops", "url": "https://www.tutorialspoint.com/unix/unix-shell-loops.htm" },
+          { "name": "GeeksforGeeks Shell Functions", "url": "https://www.geeksforgeeks.org/functions-in-shell-scripting/" },
+          { "name": "Shell Scripting Tutorial", "url": "https://www.shellscript.sh/functions.html" }
+        ],
+        "assignments": [
+          { "name": "Write a script using loops to process files", "url": "#" },
+          { "name": "Create a function to check system status", "url": "#" }
+        ]
+      },
+      {
+        "id": 3,
+        "title": "Advanced Scripting & Automation",
+        "description": "Learn cron jobs, process automation, and error handling.",
+        "resources": [
+          { "name": "Linux Automation with Shell", "url": "https://www.geeksforgeeks.org/automation-in-linux-using-shell-scripting/" },
+          { "name": "TutorialsPoint Cron Jobs", "url": "https://www.tutorialspoint.com/unix/unix-cron-jobs.htm" },
+          { "name": "Advanced Shell Scripting", "url": "https://www.shellscript.sh/advanced.html" }
+        ],
+        "assignments": [
+          { "name": "Schedule scripts using cron jobs", "url": "#" },
+          { "name": "Write error-handling mechanisms in scripts", "url": "#" }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Digital Electronics",
+    "learningId": "de",
+    "icon": "",
+    "description": "Learn digital logic, combinational & sequential circuits, and hardware fundamentals.",
+    "steps": [
+      {
+        "id": 1,
+        "title": "Digital Logic & Number Systems",
+        "description": "Learn binary, octal, hexadecimal, and Boolean algebra.",
+        "resources": [
+          { "name": "GeeksforGeeks Digital Logic", "url": "https://www.geeksforgeeks.org/digital-electronics/" },
+          { "name": "TutorialsPoint Digital Electronics", "url": "https://www.tutorialspoint.com/digital_electronics/index.htm" },
+          { "name": "NPTEL Digital Circuits", "url": "https://nptel.ac.in/courses/108/108/108108062/" }
+        ],
+        "assignments": [
+          { "name": "Convert numbers between different bases", "url": "#" },
+          { "name": "Simplify Boolean expressions using Karnaugh maps", "url": "#" }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Combinational Circuits",
+        "description": "Learn logic gates, multiplexers, decoders, and adders.",
+        "resources": [
+          { "name": "GeeksforGeeks Combinational Circuits", "url": "https://www.geeksforgeeks.org/combinational-circuits-in-digital-electronics/" },
+          { "name": "TutorialsPoint Logic Gates", "url": "https://www.tutorialspoint.com/digital_electronics/logic_gates.htm" },
+          { "name": "NPTEL Digital Logic Circuits", "url": "https://nptel.ac.in/courses/108/108/108108062/" }
+        ],
+        "assignments": [
+          { "name": "Design a 4-bit adder", "url": "#" },
+          { "name": "Implement a simple multiplexer using gates", "url": "#" }
+        ]
+      },
+      {
+        "id": 3,
+        "title": "Sequential Circuits",
+        "description": "Learn flip-flops, counters, registers, and memory elements.",
+        "resources": [
+          { "name": "GeeksforGeeks Sequential Circuits", "url": "https://www.geeksforgeeks.org/sequential-circuits-in-digital-electronics/" },
+          { "name": "TutorialsPoint Flip-Flops", "url": "https://www.tutorialspoint.com/digital_electronics/flip_flops.htm" },
+          { "name": "NPTEL Sequential Logic", "url": "https://nptel.ac.in/courses/108/108/108108062/" }
+        ],
+        "assignments": [
+          { "name": "Design a 4-bit counter", "url": "#" },
+          { "name": "Implement a shift register", "url": "#" }
+        ]
+      }
+    ]
+  }
+]

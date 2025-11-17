@@ -10,8 +10,9 @@ const icons = { ...LucideIcons }; // Allow string-based icon lookup
 const commonStyles = {
   card: "bg-gray-900 rounded-3xl p-6 border border-gray-800 shadow-lg transition-all",
   cardHover: "hover:scale-105 hover:shadow-blue-500/30",
-  btnPrimary: "bg-blue-500 text-white rounded-full hover:bg-blue-800 transition-all duration-300 shadow-lg",
-  input: "w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-3xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+  btnPrimary: "bg-blue-500 text-white rounded-full hover:bg-blue-800 transition-all duration-300 shadow-lg hover:scale-105",
+  input: "w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-3xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500",
+  submit: "w-full bg-blue-500 text-white px-4 py-3 rounded-3xl font-semibold hover:bg-blue-800 hover:scale-105 transition-all duration-300 shadow-lg"
 };
 
 // --- Custom Arrows for react-slick ---
@@ -32,7 +33,7 @@ const SlickArrow = ({ onClick, direction }) => {
     swipe: false, drag: false
   };
 
-// --- Data ---
+// --- Review Data ---
 const reviews = [
   { name: "Sudhanva S M", img: "/Images/sudhanva.png", course: "Machine Learning", quote: "This roadmap helped me understand ML and build models." },
   { name: "Sumant Shridhar", img: "/Images/sumant.jpeg", course: "Web development", quote: "I understood the concepts clearly & built my first portfolio website." },
@@ -65,7 +66,7 @@ function Navbar() {
   const navItems = [
     { id: '/', label: 'Home', icon: 'Home' },
     { id: '/roadmaps', label: 'Roadmaps', icon: 'Map' },
-    { id: '/learning', label: 'Learning', icon: 'BookOpen' },
+    { id: '/learning', label: 'Learning', icon: 'GraduationCap' },
     { id: '/about', label: 'About', icon: 'Info' },
   ];
 
@@ -93,6 +94,7 @@ function Navbar() {
     </nav>
   );
 }
+
 /**
  * Home Page Component
  */
@@ -108,18 +110,19 @@ function HomePage() {
         learning resources and track your progress.
       </p>
       <div className="flex space-x-4">
-        <button
+        <button // Explore Button
           onClick={() => navigate('/roadmaps')} // Use navigate
           className={`${commonStyles.btnPrimary} px-6 py-3 font-semibold text-lg`}>
-          Explore Roadmaps
+          Explore Roadmaps 
         </button>
-        <button
+        <button // Start Learning Button
           onClick={() => navigate('/learning')} // Use navigate
           className={`${commonStyles.btnPrimary} px-6 py-3 font-semibold text-lg`}>
           Start Learning
         </button>
       </div>
       
+      {/* Why SkillHub Section */}
       <div className="mt-20 w-full max-w-5xl mx-auto">
         <h2 className="text-3xl font-bold text-white mb-6">Why SkillHub?</h2>
         <div className="grid md:grid-cols-3 gap-8">
@@ -162,29 +165,27 @@ function HomePage() {
 
       {/* Featured Roadmap Section */}
       <div className="mt-16 md:flex items-center justify-between translate-y-3 w-full max-w-5xl mx-auto text-left bg-gray-900 rounded-3xl border border-gray-800 p-8 md:p-12 shadow-2xl">
-  
-  {/* Text Block */}
-  <div className="md:w-7/12 space-y-4">
-    <h3 className="text-lg font-semibold text-blue-400">Featured Roadmap</h3>
-    <h2 className="text-4xl font-bold text-white">Web Development</h2>
-    <p className="text-gray-400 text-lg">
-      Start from the ground up. Learn HTML, CSS, JavaScript, React, and Node.js to build modern,
-      full-stack web applications. This is the perfect place to begin your developer journey.
-    </p>
-    <button
-      onClick={() => navigate('/roadmaps/web')}
-      className={`${commonStyles.btnPrimary} px-6 py-3 font-semibold text-lg flex items-center gap-2 -translate-x-1 translate-y-2`}>
-      <span>View Web Dev Roadmap</span>
-      <LucideIcons.ArrowRight className="h-6 w-6" />
-    </button>
-  </div>
-  <div className="md:w-5/12 text-center mt-8 md:mt-0 md:mx-5">
-    <img src="/Images/web.jpg" alt="Web Dev" className="h-auto w-auto rounded-full" />
-  </div>
+        {/* Text Block */}
+        <div className="md:w-7/12 space-y-4">
+          <h3 className="text-lg font-semibold text-blue-400">Featured Roadmap</h3>
+          <h2 className="text-4xl font-bold text-white">Web Development</h2>
+          <p className="text-gray-400 text-lg">
+            Start from the ground up. Learn HTML, CSS, JavaScript, React, and Node.js to build modern,
+            full-stack web applications. This is the perfect place to begin your developer journey.
+          </p>
+          <button
+            onClick={() => navigate('/roadmaps/web')}
+            className={`${commonStyles.btnPrimary} px-6 py-3 font-semibold text-lg flex items-center gap-2 -translate-x-1 translate-y-2`}>
+            <span>View Web Dev Roadmap</span>
+            <LucideIcons.ArrowRight className="h-6 w-6" />
+          </button>
+        </div>
+        <div className="md:w-5/12 text-center mt-8 md:mt-0 md:mx-5">
+          <img src="/Images/web.jpg" alt="Web Dev" className="h-auto w-auto rounded-full" />
+        </div>
+      </div>
 
-</div>
-
-      {/* --- Student Testimonials Carousel --- */}
+      {/* --- Student Reviews Carousel --- */}
       <div className="w-full max-w-6xl mx-auto mt-14">
         <h2 className="text-3xl font-bold text-white mb-8 text-center">Student Reviews</h2>
         {/* The slick-container class is used for custom dot styling in index.css */}
@@ -206,9 +207,9 @@ function HomePage() {
         </div>
       </div>
 
-      {/* Call to Action Section */}
+      {/* Ready To Start Section */}
       <div className="mt-24 text-center -translate-y-3">
-        <h2 className="text-3xl font-bold text-white mb-4">Ready to Start?</h2>
+        <h2 className="text-3xl font-bold text-white mb-4">Ready To Start?</h2>
         <p className="text-lg text-gray-200 mb-6">
           Jump right into a roadmap or explore a new topic.
         </p>
@@ -227,7 +228,8 @@ function HomePage() {
  */
 function AboutPage() {
   ScrollToTop();
-
+  
+  // Tech Stack Array
   const techStack = [
     { name: "MongoDB", description: "Database" },
     { name: "Express.js", description: "Back-End Framework" },
@@ -252,14 +254,15 @@ function AboutPage() {
           This project's goal is to provide a clean, non-distracting, and structured learning experience. It demonstrates a complete
             MERN stack application, from the database to the UI, all while serving as a genuinely useful tool.
         </p>
+        {/* Features Section */}
         <h3 className="text-2xl font-semibold text-white mt-6 mb-3">Features</h3>
         <ul className="list-disc list-inside text-gray-300 space-y-2">
-          <li>12+ curated roadmaps for high-demand CS domains.</li>
-            <li>10+ structured learning paths for fundamental topics.</li>
-            <li>Interactive checkpoint system to track your progress (WIP).</li>
-            <li>Dynamic page routing using 'react-router-dom'.</li>
-            <li>Full MERN stack (MongoDB, Express, React, Node.js).</li>
-            <li>A clean, responsive, dark-mode UI built with Tailwind CSS.</li>
+          <li>Specialized curated roadmaps for high-demand CS domains.</li>
+          <li>Diverse structured learning paths for fundamental topics.</li>
+          <li>Interactive checkpoint system to track your progress (WIP).</li>
+          <li>Dynamic page routing using 'react-router-dom'.</li>
+          <li>Full MERN stack (MongoDB, Express, React, Node.js).</li>
+          <li>A clean, responsive, dark-mode UI built with Tailwind CSS.</li>
         </ul>
       </div>
 
@@ -290,14 +293,13 @@ function RoadmapsPage() {
       <h2 className="text-4xl font-bold mb-8 mt-1 text-center text-white">CS Domain Roadmaps</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {roadmaps.map((roadmap) => {
-          const IconComponent = icons[roadmap.icon] || Map;
+          const IconComponent = icons[roadmap.icon] || Map; // Default Icon is Map
           return (
             <Link
               key={roadmap._id}
               to={`/roadmaps/${roadmap.roadmapId}`} // Navigate to detail page URL
-              className="block bg-gray-900 rounded-3xl shadow-lg p-6 border border-gray-800
-                         transform transition-all duration-300 hover:scale-105 hover:shadow-blue-500/30
-                         text-left w-full hover:border-blue-500"
+              className={`${commonStyles.card} ${commonStyles.cardHover} transform duration-300 group
+                         text-left w-full hover:border-blue-500`}
             >
               <IconComponent className="h-12 w-12 text-blue-400 mb-4" />
               <h3 className="text-2xl font-semibold mb-2 text-white">{roadmap.title}</h3>
@@ -319,7 +321,6 @@ function LearningPage() {
 
   return (
     <div className="p-8">
-      {/* FIXED: Text color for dark theme */}
       <h2 className="text-4xl font-bold mb-8 mt-1 text-center text-white">Learning Section</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {learningItems.map((item) => {
@@ -327,10 +328,9 @@ function LearningPage() {
           return (
             <Link
               key={item._id}
-              to={`/learning/${item.learningId}`} // Navigate to NEW detail page URL
-              className="block bg-gray-900 rounded-3xl shadow-lg p-6 border border-gray-800
-                         transform transition-all duration-300 hover:scale-105 hover:shadow-blue-500/30 group
-                         text-left w-full hover:border-blue-500"
+              to={`/learning/${item.learningId}`} // Navigate to detail page URL
+              className={`${commonStyles.card} ${commonStyles.cardHover} transform duration-300 group
+                         text-left w-full hover:border-blue-500`}
             >
               <div className="flex items-center justify-between mb-4">
                 <IconComponent className="h-10 w-10 text-blue-400" />
@@ -404,7 +404,6 @@ function RoadmapDetailPage() {
       {roadmap.steps && roadmap.steps.length > 0 ? (
         <div className="space-y-6">
           {roadmap.steps.map((step) => {
-            // FIXED: Unique stepId
             const stepId = `roadmap-${roadmapId}-${step.id}`;
             const isComplete = !!progressData[stepId];
 
@@ -558,7 +557,7 @@ function AuthForm({ title, buttonText, isRegister = false }) {
                 <input
                   type="text"
                   id="name"
-                  className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className={`${commonStyles.input}`}
                   placeholder="John Doe"
                 />
               </div>
@@ -570,7 +569,7 @@ function AuthForm({ title, buttonText, isRegister = false }) {
               <input
                 type="email"
                 id="email"
-                className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-3xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className={`${commonStyles.input}`}
                 placeholder="you@example.com"
               />
             </div>
@@ -581,13 +580,13 @@ function AuthForm({ title, buttonText, isRegister = false }) {
               <input
                 type="password"
                 id="password"
-                className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-3xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="••••••••"
+                className={`${commonStyles.input}`}
+                placeholder="*******"
               />
             </div>
             <button
               type="submit"
-              className="w-full bg-blue-500 text-white px-4 py-3 rounded-3xl font-semibold hover:bg-blue-800 transition-all duration-300 shadow-lg"
+              className={`${commonStyles.submit}`}
             >
               {buttonText}
             </button>
@@ -619,7 +618,6 @@ function ProfilePage() {
 
   return (
     <div className="p-8 mt-1 max-w-4xl mx-auto">
-      {/* FIXED: Text color for dark theme */}
       <h2 className="text-4xl font-bold mb-8 text-center text-white">Your Profile</h2>
       <div className="bg-gray-900 rounded-3xl shadow-lg p-8 border border-gray-800">
         <div className="flex items-center space-x-6 mb-8">
@@ -642,7 +640,6 @@ function ProfilePage() {
           ></div>
         </div>
         <p className="text-right text-blue-400 font-semibold">{progress}% Complete</p>
-
       </div>
     </div>
   );
@@ -684,7 +681,7 @@ function Layout() {
         // Fetch roadmaps and learning items in parallel
         const [roadmapsRes, learningRes] = await Promise.all([
           fetch('http://localhost:5000/api/content/roadmaps'),
-          fetch('http://localhost:5000/api/content/learning') // FIXED: Use new endpoint
+          fetch('http://localhost:5000/api/content/learning') 
         ]);
         
         const roadmapsData = await roadmapsRes.json();
@@ -723,7 +720,7 @@ function Layout() {
   const totalSteps = totalRoadmapSteps + totalLearningSteps;
 
   return (
-    <div className="min-h-screen bg-black text-white font-sans flex flex-col"
+    <div className="min-h-screen bg-gray-950 text-white font-sans flex flex-col"
          style = {{
            backgroundImage: `
            linear-gradient(to right, rgba(255,255,255,0.12) 1px, transparent 1px),

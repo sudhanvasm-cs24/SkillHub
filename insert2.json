@@ -1,0 +1,721 @@
+[
+  {
+    "title": "Operating Systems",
+    "learningId": "os",
+    "icon": "",
+    "description": "Understand the core concepts of how computer operating systems work.",
+    "steps": [
+      {
+        "id": 1,
+        "title": "Introduction to OS",
+        "description": "What is an OS? Learn about processes, threads, and the kernel.",
+        "resources": [
+          { "name": "GeeksforGeeks - OS Introduction", "url": "https://www.geeksforgeeks.org/introduction-of-operating-system-set-1/" },
+          { "name": "TutorialsPoint - What is an OS?", "url": "https://www.tutorialspoint.com/operating_system/os_overview.htm" },
+          { "name": "OS Concepts (Book)", "url": "https://www.os-book.com/OS10/" },
+          { "name": "YouTube - OS Introduction", "url": "https://www.youtube.com/watch?v=vBURTt97EkA&list=PLBlnK6fEyqRiVhbXDGLXDk_OQAeuVcp2O" }
+        ],
+        "assignments": [
+          { "name": "Quiz: What is a Process vs. Thread?", "url": "#" },
+          { "name": "Explain the role of the Kernel", "url": "#" }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Process Management",
+        "description": "Learn about process scheduling, CPU scheduling algorithms (FCFS, SJF, etc.), and inter-process communication.",
+        "resources": [
+          { "name": "GeeksforGeeks - CPU Scheduling", "url": "https://www.geeksforgeeks.org/cpu-scheduling-in-operating-systems/" },
+          { "name": "Javatpoint - Process Scheduling", "url": "https://www.javatpoint.com/os-process-scheduling-algorithms" },
+          { "name": "TutorialsPoint - IPC", "url": "https://www.tutorialspoint.com/inter_process_communication/index.htm" },
+          { "name": "YouTube - CPU Scheduling Algorithms", "url": "https://www.youtube.com/watch?v=4E91pd8-nPY&list=PLBlnK6fEyqRiVhbXDGLXDk_OQAeuVcp2O&index=7" }
+        ],
+        "assignments": [
+          { "name": "Implement the FCFS scheduling algorithm", "url": "#" },
+          { "name": "Explain Preemptive vs. Non-Preemptive scheduling", "url": "#" }
+        ]
+      },
+      {
+        "id": 3,
+        "title": "Memory Management",
+        "description": "Understand paging, segmentation, and virtual memory.",
+        "resources": [
+          { "name": "GeeksforGeeks - Paging", "url": "https://www.geeksforgeeks.org/paging-in-operating-system/" },
+          { "name": "GeeksforGeeks - Virtual Memory", "url": "https://www.geeksforgeeks.org/virtual-memory-in-operating-system/" },
+          { "name": "Javatpoint - Memory Management", "url": "https://www.javatpoint.com/os-memory-management" },
+          { "name": "YouTube - Paging and Segmentation", "url": "https://www.youtube.com/watch?v=7-n_w21-2hE&list=PLBlnK6fEyqRiVhbXDGLXDk_OQAeuVcp2O&index=20" }
+        ],
+        "assignments": [
+          { "name": "Solve a page replacement algorithm problem (FIFO, LRU)", "url": "#" },
+          { "name": "Explain the difference between Paging and Segmentation", "url": "#" }
+        ]
+      },
+      {
+        "id": 4,
+        "title": "Concurrency & Deadlock",
+        "description": "Learn about semaphores, mutexes, critical sections, and deadlock conditions.",
+        "resources": [
+          { "name": "GeeksforGeeks - Semaphores", "url": "https://www.geeksforgeeks.org/semaphores-in-operating-system/" },
+          { "name": "GeeksforGeeks - Deadlock", "url": "https://www.geeksforgeeks.org/introduction-of-deadlock-in-operating-system/" },
+          { "name": "TutorialsPoint - Deadlock", "url": "https://www.tutorialspoint.com/operating_system/os_deadlock.htm" },
+          { "name": "YouTube - Deadlock", "url": "https://www.youtube.com/watch?v=gS01-hC-cjw&list=PLBlnK6fEyqRiVhbXDGLXDk_OQAeuVcp2O&index=16" }
+        ],
+        "assignments": [
+          { "name": "Explain the four conditions for deadlock", "url": "#" },
+          { "name": "Solve the Banker's Algorithm problem", "url": "#" }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Database Management",
+    "learningId": "dbms",
+    "icon": "",
+    "description": "Learn how to design, query, and manage relational databases.",
+    "steps": [
+      {
+        "id": 1,
+        "title": "Introduction to Databases",
+        "description": "Learn the basics: SQL vs. NoSQL, Relational Model, and Database Keys.",
+        "resources": [
+          { "name": "GeeksforGeeks - DBMS", "url": "https://www.geeksforgeeks.org/introduction-of-dbms-database-management-system-set-1/" },
+          { "name": "W3Schools - SQL Intro", "url": "https://www.w3schools.com/sql/sql_intro.asp" },
+          { "name": "MongoDB - SQL vs NoSQL", "url": "https://www.mongodb.com/compare/sql-vs-nosql" },
+          { "name": "YouTube - SQL vs NoSQL", "url": "https://www.youtube.com/watch?v=ZS_kXvOeQ5Y" }
+        ],
+        "assignments": [
+          { "name": "Explain the difference between SQL and NoSQL", "url": "#" },
+          { "name": "Define Primary Key, Foreign Key, and Super Key", "url": "#" }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Relational Algebra & SQL",
+        "description": "Master SQL queries, including SELECT, WHERE, GROUP BY, and JOINs.",
+        "resources": [
+          { "name": "W3Schools - SQL JOINs", "url": "https://www.w3schools.com/sql/sql_join.asp" },
+          { "name": "GeeksforGeeks - SQL Queries", "url": "https://www.geeksforgeeks.org/sql-tutorial/" },
+          { "name": "SQLZoo - Interactive SQL Tutorial", "url": "https://sqlzoo.net/wiki/SQL_Tutorial" },
+          { "name": "YouTube - SQL JOINs and GROUP BY", "url": "https://www.youtube.com/watch?v=zE_aG5tG-vI" }
+        ],
+        "assignments": [
+          { "name": "Write a query to JOIN two tables", "url": "#" },
+          { "name": "Write a query using GROUP BY and HAVING", "url": "#" },
+          { "name": "Solve SQLZoo 'SELECT from Nobel' tutorial", "url": "#" }
+        ]
+      },
+      {
+        "id": 3,
+        "title": "Database Design & ER Model",
+        "description": "Learn about Entity-Relationship diagrams and how to design a good database schema.",
+        "resources": [
+          { "name": "GeeksforGeeks - ER Model", "url": "https://www.geeksforgeeks.org/entity-relationship-er-model/" },
+          { "name": "TutorialsPoint - ER Model", "url": "https://www.tutorialspoint.com/dbms/dbms_er_model.htm" },
+          { "name": "Javatpoint - ER Diagram", "url": "https://www.javatpoint.com/dbms-er-diagram" },
+          { "name": "YouTube - ER Diagrams", "url": "https://www.youtube.com/watch?v=QpdhBUYk7Kk" }
+        ],
+        "assignments": [
+          { "name": "Draw an ER Diagram for a University system", "url": "#" },
+          { "name": "Convert an ER Diagram to relational tables", "url": "#" }
+        ]
+      },
+      {
+        "id": 4,
+        "title": "Normalization",
+        "description": "Understand functional dependencies and normalization forms (1NF, 2NF, 3NF, BCNF).",
+        "resources": [
+          { "name": "GeeksforGeeks - Normalization", "url": "https://www.geeksforgeeks.org/normalization-in-dbms/" },
+          { "name": "Javatpoint - Normalization", "url": "https://www.javatpoint.com/dbms-normalization" },
+          { "name": "W3Schools - Normalization", "url": "https://www.w3schools.in/dbms/database-normalization/" },
+          { "name": "YouTube - Database Normalization (1NF, 2NF, 3NF)", "url": "https://www.youtube.com/watch?v=GFqaLBGRX9s" }
+        ],
+        "assignments": [
+          { "name": "Normalize a given table to 3NF", "url": "#" },
+          { "name": "Explain what BCNF is and how it differs from 3NF", "url": "#" }
+        ]
+      },
+      {
+        "id": 5,
+        "title": "Transactions & Concurrency",
+        "description": "Learn about ACID properties, transaction states, and concurrency control.",
+        "resources": [
+          { "name": "GeeksforGeeks - ACID Properties", "url": "https://www.geeksforgeeks.org/acid-properties-in-dbms/" },
+          { "name": "Javatpoint - DBMS Transaction", "url": "https://www.javatpoint.com/dbms-transaction" },
+          { "name": "TutorialsPoint - Concurrency Control", "url": "https://www.tutorialspoint.com/dbms/dbms_concurrency_control.htm" },
+          { "name": "YouTube - ACID Properties", "url": "https://www.youtube.com/watch?v=p8_EFTt38Og" }
+        ],
+        "assignments": [
+          { "name": "Explain all four ACID properties", "url": "#" },
+          { "name": "What is a transaction schedule?", "url": "#" }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Computer Architecture",
+    "learningId": "ca",
+    "icon": "",
+    "description": "Look under the hood at how a computer is built and functions.",
+    "steps": [
+      {
+        "id": 1,
+        "title": "Data Representation",
+        "description": "Learn binary, hexadecimal, 2's complement, and IEEE 754 floating-point representation.",
+        "resources": [
+          { "name": "GeeksforGeeks - Data Representation", "url": "https://www.geeksforgeeks.org/digital-electronics-logic-design-tutorials/" },
+          { "name": "TutorialsPoint - Number Systems", "url": "https://www.tutorialspoint.com/computer_fundamentals/computer_number_system.htm" },
+          { "name": "Javatpoint - IEEE 754", "url": "https://www.javatpoint.com/ieee-754-floating-point-representation" },
+          { "name": "YouTube - IEEE 754 Floating Point", "url": "https://www.youtube.com/watch?v=N_2gl-Vba48" }
+        ],
+        "assignments": [
+          { "name": "Convert a decimal number to IEEE 754 format", "url": "#" },
+          { "name": "Perform binary subtraction using 2's complement", "url": "#" }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Logic Gates & Boolean Algebra",
+        "description": "Understand basic logic gates (AND, OR, NOT, XOR) and simplifying expressions using Boolean algebra.",
+        "resources": [
+          { "name": "GeeksforGeeks - Logic Gates", "url": "https://www.geeksforgeeks.org/logic-gates-in-digital-electronics/" },
+          { "name": "Javatpoint - Boolean Algebra", "url": "https://www.javatpoint.com/boolean-algebra" },
+          { "name": "TutorialsPoint - Boolean Algebra", "url": "https://www.tutorialspoint.com/digital_circuits/digital_circuits_boolean_algebra.htm" },
+          { "name": "YouTube - Boolean Logic & Logic Gates", "url": "https://www.youtube.com/watch?v=gI-qXk7XojA" }
+        ],
+        "assignments": [
+          { "name": "Simplify a Boolean expression using K-Maps", "url": "#" },
+          { "name": "Implement a Full Adder using basic logic gates", "url": "#" }
+        ]
+      },
+      {
+        "id": 3,
+        "title": "CPU Architecture & Pipelining",
+        "description": "Learn the components of a CPU (ALU, Control Unit), the instruction cycle, and pipelining.",
+        "resources": [
+          { "name": "GeeksforGeeks - CPU Architecture", "url": "https://www.geeksforgeeks.org/computer-organization-and-architecture-tutorials/" },
+          { "name": "GeeksforGeeks - Pipelining", "url": "https://www.geeksforgeeks.org/pipelining-in-computer-architecture/" },
+          { "name": "Javatpoint - Instruction Cycle", "url": "https://www.javatpoint.com/instruction-cycle-in-computer-architecture" },
+          { "name": "YouTube - CPU Pipelining", "url": "https://www.youtube.com/watch?v=p3Mpo17sW-Y" }
+        ],
+        "assignments": [
+          { "name": "Draw a diagram of the instruction cycle", "url": "#" },
+          { "name": "Explain different types of pipeline hazards", "url": "#" }
+        ]
+      },
+      {
+        "id": 4,
+        "title": "Memory Hierarchy",
+        "description": "Understand the differences between registers, cache, RAM, and virtual memory.",
+        "resources": [
+          { "name": "GeeksforGeeks - Memory Hierarchy", "url": "https://www.geeksforgeeks.org/memory-hierarchy-in-computer-organization/" },
+          { "name": "Javatpoint - Cache Memory", "url": "https://www.javatpoint.com/cache-memory-in-computer-organization" },
+          { "name": "TutorialsPoint - Virtual Memory", "url": "https://www.tutorialspoint.com/operating_system/os_virtual_memory.htm" },
+          { "name": "YouTube - Memory Hierarchy", "url": "https://www.youtube.com/watch?v=vjYF_yqQ-sE" }
+        ],
+        "assignments": [
+          { "name": "Explain cache mapping techniques (Direct, Associative)", "url": "#" },
+          { "name": "Define 'Locality of Reference'", "url": "#" }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Computer Networks",
+    "learningId": "cn",
+    "icon": "",
+    "description": "Learn how computers communicate and the protocols of the internet.",
+    "steps": [
+      {
+        "id": 1,
+        "title": "OSI & TCP/IP Models",
+        "description": "Learn the 7 layers of the OSI model and the 4 layers of the TCP/IP model.",
+        "resources": [
+          { "name": "GeeksforGeeks - OSI Model", "url": "https://www.geeksforgeeks.org/layers-of-osi-model/" },
+          { "name": "Cloudflare - What is the OSI Model?", "url": "https://www.cloudflare.com/learning/ddos/what-is-the-osi-model/" },
+          { "name": "Javatpoint - TCP/IP Model", "url": "https://www.javatpoint.com/computer-network-tcp-ip-model" },
+          { "name": "YouTube - OSI and TCP/IP Models", "url": "https://www.youtube.com/watch?v=0Q7-e-b-S-Y" }
+        ],
+        "assignments": [
+          { "name": "Explain the function of each OSI layer", "url": "#" },
+          { "name": "Compare the OSI and TCP/IP models", "url": "#" }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Network Layer",
+        "description": "Understand IP addressing (IPv4/v6), subnetting, and routing algorithms (RIP, OSPF).",
+        "resources": [
+          { "name": "GeeksforGeeks - IP Addressing", "url": "https://www.geeksforgeeks.org/ip-addressing-in-computer-network/" },
+          { "name": "GeeksforGeeks - Subnetting", "url": "https://www.geeksforgeeks.org/subnetting-in-computer-network/" },
+          { "name": "TutorialsPoint - Routing Algorithms", "url": "https://www.tutorialspoint.com/data_communication_computer_network/routing_algorithms.htm" },
+          { "name": "YouTube - Subnetting Explained", "url": "https://www.youtube.com/watch?v=rs39-sE1T-s" }
+        ],
+        "assignments": [
+          { "name": "Solve a subnetting problem", "url": "#" },
+          { "name": "Explain the difference between IPv4 and IPv6", "url": "#" },
+          { "name": "Compare Distance Vector and Link State routing", "url": "#" }
+        ]
+      },
+      {
+        "id": 3,
+        "title": "Transport Layer",
+        "description": "Learn the difference between TCP and UDP, and how TCP connection management works.",
+        "resources": [
+          { "name": "GeeksforGeeks - TCP vs UDP", "url": "https://www.geeksforgeeks.org/difference-between-tcp-and-udp-in-computer-network/" },
+          { "name": "Cloudflare - What is TCP?", "url": "https://www.cloudflare.com/learning/ddos/glossary/transmission-control-protocol-tcp/" },
+          { "name": "Javatpoint - TCP 3-Way Handshake", "url": "https://www.javatpoint.com/computer-network-tcp-3-way-handshake" },
+          { "name": "YouTube - TCP vs. UDP", "url": "https://www.youtube.com/watch?v=u-bK-9v-o18" }
+        ],
+        "assignments": [
+          { "name": "Draw the diagram for the TCP 3-way handshake", "url": "#" },
+          { "name": "List 3 applications that use TCP and 3 that use UDP", "url": "#" }
+        ]
+      },
+      {
+        "id": 4,
+        "title": "Application Layer",
+        "description": "Understand the protocols that power the web: HTTP, HTTPS, DNS, and SMTP.",
+        "resources": [
+          { "name": "GeeksforGeeks - HTTP", "url": "https://www.geeksforgeeks.org/http-in-computer-network/" },
+          { "name": "Cloudflare - What is DNS?", "url": "https://www.cloudflare.com/learning/dns/what-is-dns/" },
+          { "name": "TutorialsPoint - SMTP", "url": "https://www.tutorialspoint.com/smtp/smtp_overview.htm" },
+          { "name": "YouTube - How DNS Works", "url": "https://www.youtube.com/watch?v=mpQZVYPuDGU" }
+        ],
+        "assignments": [
+          { "name": "Explain the step-by-step process of a DNS query", "url": "#" },
+          { "name": "What is the difference between HTTP and HTTPS?", "url": "#" }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Algorithms",
+    "learningId": "algo",
+    "icon": "",
+    "description": "Master fundamental algorithms for efficient problem-solving.",
+    "steps": [
+      {
+        "id": 1,
+        "title": "Asymptotic Analysis",
+        "description": "Understand how to measure the efficiency of code using Big O, Omega, and Theta notation.",
+        "resources": [
+          { "name": "GeeksforGeeks - Big O Notation", "url": "https://www.geeksforgeeks.org/analysis-algorithms-big-o-analysis/" },
+          { "name": "Khan Academy - Asymptotic Notation", "url": "https://www.khanacademy.org/computing/computer-science/algorithms/asymptotic-notation/a/asymptotic-notation" },
+          { "name": "Javatpoint - Time Complexity", "url": "https://www.javatpoint.com/data-structure-time-complexity" },
+          { "name": "YouTube - Big O Notation", "url": "https://www.youtube.com/watch?v=kS_gr2_-ws8" }
+        ],
+        "assignments": [
+          { "name": "Calculate the Big O of a nested loop", "url": "#" },
+          { "name": "Explain the difference between Big O and Big Theta", "url": "#" }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Sorting & Searching",
+        "description": "Learn classic algorithms like Bubble, Insertion, Merge, and Quick Sort, as well as Binary Search.",
+        "resources": [
+          { "name": "GeeksforGeeks - Sorting Algorithms", "url": "https://www.geeksforgeeks.org/sorting-algorithms/" },
+          { "name": "GeeksforGeeks - Binary Search", "url": "https://www.geeksforgeeks.org/binary-search/" },
+          { "name": "Toptal - Sorting Algorithms Visualized", "url": "https://www.toptal.com/developers/sorting-algorithms" },
+          { "name": "YouTube - Merge Sort vs Quick Sort", "url": "https://www.youtube.com/watch?v=sO1-37-A2j4" }
+        ],
+        "assignments": [
+          { "name": "Implement Merge Sort from scratch", "url": "#" },
+          { "name": "Implement iterative and recursive Binary Search", "url": "#" },
+          { "name": "Compare Quick Sort and Merge Sort", "url": "#" }
+        ]
+      },
+      {
+        "id": 3,
+        "title": "Graph Algorithms",
+        "description": "Learn how to traverse graphs (BFS, DFS) and find shortest paths (Dijkstra's, Bellman-Ford).",
+        "resources": [
+          { "name": "GeeksforGeeks - BFS and DFS", "url": "https://www.geeksforgeeks.org/breadth-first-search-or-bfs-for-a-graph/" },
+          { "name": "GeeksforGeeks - Dijkstra's Algorithm", "url": "https://www.geeksforgeeks.org/dijkstras-shortest-path-algorithm-greedy-algo-7/" },
+          { "name": "Javatpoint - Graph Algorithms", "url": "https://www.javatpoint.com/ds-graph" },
+          { "name": "YouTube - Dijkstra's Algorithm", "url": "https://www.youtube.com/watch?v=bZfLRH-9vXI" }
+        ],
+        "assignments": [
+          { "name": "Implement BFS on an adjacency matrix", "url": "#" },
+          { "name": "Solve a shortest path problem using Dijkstra's", "url": "#" }
+        ]
+      },
+      {
+        "id": 4,
+        "title": "Dynamic Programming",
+        "description": "Understand the concept of overlapping subproblems and memoization/tabulation.",
+        "resources": [
+          { "name": "GeeksforGeeks - Dynamic Programming", "url": "https://www.geeksforgeeks.org/dynamic-programming/" },
+          { "name": "Javatpoint - Dynamic Programming", "url": "https://www.javatpoint.com/dynamic-programming" },
+          { "name": "Toptal - DP Introduction", "url": "https://www.toptal.com/developers/blog/an-introduction-to-dynamic-programming" },
+          { "name": "YouTube - Intro to Dynamic Programming", "url": "https://www.youtube.com/watch?v=PttgNGRyYQg" }
+        ],
+        "assignments": [
+          { "name": "Solve the Fibonacci sequence using Memoization", "url": "#" },
+          { "name": "Solve the 0/1 Knapsack problem", "url": "#" },
+          { "name": "Explain Memoization vs. Tabulation", "url": "#" }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Cryptography",
+    "learningId": "crypto",
+    "icon": "",
+    "description": "Learn the principles of securing information and communication.",
+    "steps": [
+      {
+        "id": 1,
+        "title": "Cryptography Basics",
+        "description": "Learn classical ciphers (Caesar, Vigenere) and the core concepts of modern cryptography.",
+        "resources": [
+          { "name": "GeeksforGeeks - Cryptography Intro", "url": "https://www.geeksforgeeks.org/cryptography-an-introduction/" },
+          { "name": "TutorialsPoint - Cryptography Basics", "url": "https://www.tutorialspoint.com/cryptography/cryptography_overview.htm" },
+          { "name": "Khan Academy - Intro to Cryptography", "url": "https://www.khanacademy.org/computing/computer-science/cryptography" },
+          { "name": "YouTube - Symmetric vs Asymmetric", "url": "https://www.youtube.com/watch?v=w-5n9m4_g-c" }
+        ],
+        "assignments": [
+          { "name": "Encrypt a message using a Vigenere cipher", "url": "#" },
+          { "name": "Explain Symmetric vs. Asymmetric cryptography", "url": "#" }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Symmetric Key Cryptography",
+        "description": "Understand block ciphers, stream ciphers, DES, and AES.",
+        "resources": [
+          { "name": "GeeksforGeeks - AES", "url": "https://www.geeksforgeeks.org/advanced-encryption-standard-aes/" },
+          { "name": "Javatpoint - Symmetric Key", "url": "https://www.javatpoint.com/cryptography-symmetric-key-cryptography" },
+          { "name": "TutorialsPoint - DES", "url": "https://www.tutorialspoint.com/cryptography/data_encryption_standard.htm" },
+          { "name": "YouTube - AES Explained (Computerphile)", "url": "https://www.youtube.com/watch?v=O4xNJsjtN6E" }
+        ],
+        "assignments": [
+          { "name": "Explain the difference between DES and AES", "url": "#" },
+          { "name": "Describe ECB and CBC modes of operation", "url": "#" }
+        ]
+      },
+      {
+        "id": 3,
+        "title": "Asymmetric Key Cryptography",
+        "description": "Learn about public/private keys, the RSA algorithm, and Diffie-Hellman key exchange.",
+        "resources": [
+          { "name": "GeeksforGeeks - RSA Algorithm", "url": "https://www.geeksforgeeks.org/rsa-algorithm-cryptography/" },
+          { "name": "Javatpoint - Diffie-Hellman", "url": "https://www.javatpoint.com/cryptography-diffie-hellman-algorithm" },
+          { "name": "TutorialsPoint - RSA", "url": "https://www.tutorialspoint.com/cryptography/rsa_algorithm.htm" },
+          { "name": "YouTube - RSA Algorithm", "url": "https://www.youtube.com/watch?v=oOcTVTpUsPQ" }
+        ],
+        "assignments": [
+          { "name": "Solve a simple RSA key generation problem", "url": "#" },
+          { "name": "Explain the Diffie-Hellman key exchange process", "url": "#" }
+        ]
+      },
+      {
+        "id": 4,
+        "title": "Hashing & Digital Signatures",
+        "description": "Understand message integrity with hash functions (MD5, SHA) and authentication with digital signatures.",
+        "resources": [
+          { "name": "GeeksforGeeks - Hash Functions", "url": "https://www.geeksforgeeks.org/introduction-to-cryptographic-hash-functions/" },
+          { "name": "GeeksforGeeks - Digital Signatures", "url": "https://www.geeksforgeeks.org/digital-signatures-certificates/" },
+          { "name": "Javatpoint - Digital Signature", "url": "https://www.javatpoint.com/cryptography-digital-signature" },
+          { "name": "YouTube - Hashing vs Encryption", "url": "https://www.youtube.com/watch?v=b4b8ktEV4Bg" }
+        ],
+        "assignments": [
+          { "name": "Explain the difference between Hashing and Encryption", "url": "#" },
+          { "name": "Draw a diagram of how digital signatures work", "url": "#" },
+          { "name": "Why is MD5 considered insecure?", "url": "#" }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Engineering Mathematics",
+    "learningId": "math",
+    "icon": "",
+    "description": "Master the foundational math for all CS disciplines.",
+    "steps": [
+      {
+        "id": 1,
+        "title": "Discrete Mathematics",
+        "description": "Learn the foundations: Set Theory, Propositional Logic, and basic Graph Theory.",
+        "resources": [
+          { "name": "GeeksforGeeks - Discrete Mathematics", "url": "https://www.geeksforgeeks.org/discrete-mathematics-tutorials/" },
+          { "name": "TutorialsPoint - Discrete Math", "url": "https://www.tutorialspoint.com/discrete_mathematics/index.htm" },
+          { "name": "Javatpoint - Set Theory", "url": "https://www.javatpoint.com/set-theory" },
+          { "name": "YouTube - Intro to Set Theory", "url": "https://www.youtube.com/watch?v=tyg_e_f_QCk" }
+        ],
+        "assignments": [
+          { "name": "Construct a truth table for a compound proposition", "url": "#" },
+          { "name": "Explain the Handshaking Lemma in Graph Theory", "url": "#" }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Linear Algebra",
+        "description": "Understand vectors, matrices, determinants, and eigenvalues/eigenvectors.",
+        "resources": [
+          { "name": "Khan Academy - Linear Algebra", "url": "https://www.khanacademy.org/math/linear-algebra" },
+          { "name": "GeeksforGeeks - Matrices", "url": "https://www.geeksforgeeks.org/matrix-in-python/" },
+          { "name": "3Blue1Brown - Essence of Linear Algebra", "url": "https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab" },
+          { "name": "YouTube - Why is Linear Algebra useful?", "url": "https://www.youtube.com/watch?v=4-i-A-g_rnE" }
+        ],
+        "assignments": [
+          { "name": "Solve a 3x3 system of linear equations", "url": "#" },
+          { "name": "Calculate the eigenvalues of a 2x2 matrix", "url": "#" }
+        ]
+      },
+      {
+        "id": 3,
+        "title": "Calculus",
+        "description": "Learn the basics of limits, differentiation, and integration.",
+        "resources": [
+          { "name": "Khan Academy - Calculus 1", "url": "https://www.khanacademy.org/math/calculus-1" },
+          { "name": "GeeksforGeeks - Calculus Basics", "url": "https://www.geeksforgeeks.org/mathematics-for-machine-learning-calculus/" },
+          { "name": "3Blue1Brown - Essence of Calculus", "url": "https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5-4" },
+          { "name": "YouTube - Understand Calculus in 10 Minutes", "url": "https://www.youtube.com/watch?v=Ws-a-y5xN8o" }
+        ],
+        "assignments": [
+          { "name": "Find the derivative of a polynomial function", "url": "#" },
+          { "name": "Find the area under a simple curve using integration", "url": "#" }
+        ]
+      },
+      {
+        "id": 4,
+        "title": "Probability & Statistics",
+        "description": "Understand mean, median, variance, probability distributions, and Bayes' Theorem.",
+        "resources": [
+          { "name": "Khan Academy - Statistics and Probability", "url": "https://www.khanacademy.org/math/statistics-probability" },
+          { "name": "GeeksforGeeks - Bayes' Theorem", "url": "https://www.geeksforgeeks.org/bayes-theorem-for-machine-learning/" },
+          { "name": "Javatpoint - Statistics", "url": "https://www.javatpoint.com/statistics" },
+          { "name": "YouTube - Bayes' Theorem", "url": "https://www.youtube.com/watch?v=lQVkXfJ-rpU" }
+        ],
+        "assignments": [
+          { "name": "Solve a problem using Bayes' Theorem", "url": "#" },
+          { "name": "Explain Normal Distribution", "url": "#" },
+          { "name": "Calculate the variance of a small dataset", "url": "#" }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Software Engineering",
+    "learningId": "se",
+    "icon": "",
+    "description": "Learn the process of building and maintaining large-scale software.",
+    "steps": [
+      {
+        "id": 1,
+        "title": "SDLC Models",
+        "description": "Understand the Software Development Life Cycle models: Waterfall, Agile, Scrum, and Kanban.",
+        "resources": [
+          { "name": "GeeksforGeeks - SDLC", "url": "https://www.geeksforgeeks.org/software-development-life-cycle-sdlc/" },
+          { "name": "Atlassian - What is Agile?", "url": "https://www.atlassian.com/agile" },
+          { "name": "TutorialsPoint - SDLC", "url": "https://www.tutorialspoint.com/sdlc/sdlc_overview.htm" },
+          { "name": "YouTube - Agile vs Waterfall", "url": "https://www.youtube.com/watch?v=5RocT_OdQcA" }
+        ],
+        "assignments": [
+          { "name": "Compare the Waterfall and Agile models", "url": "#" },
+          { "name": "Explain the roles in a Scrum team (Product Owner, Scrum Master)", "url": "#" }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Requirement Engineering",
+        "description": "Learn how to gather functional and non-functional requirements.",
+        "resources": [
+          { "name": "GeeksforGeeks - Software Requirements", "url": "https://www.geeksforgeeks.org/software-engineering-requirements-engineering-process/" },
+          { "name": "Javatpoint - Requirement Engineering", "url": "https://www.javatpoint.com/software-engineering-requirement-engineering" },
+          { "name": "TutorialsPoint - Requirements", "url": "https://www.tutorialspoint.com/software_engineering/software_requirements.htm" },
+          { "name": "YouTube - Functional vs Non-Functional", "url": "https://www.youtube.com/watch?v=zmr_r3Y_x4Q" }
+        ],
+        "assignments": [
+          { "name": "Write 3 functional and 3 non-functional requirements for a login page", "url": "#" },
+          { "name": "Explain the steps of requirement engineering", "url": "#" }
+        ]
+      },
+      {
+        "id": 3,
+        "title": "Software Design & UML",
+        "description": "Learn about software design principles (SOLID) and UML diagrams (Use Case, Class, Sequence).",
+        "resources": [
+          { "name": "GeeksforGeeks - SOLID Principles", "url": "https://www.geeksforgeeks.org/solid-principles-in-software-design/" },
+          { "name": "GeeksforGeeks - UML Diagrams", "url": "https://www.geeksforgeeks.org/unified-modeling-language-uml-introduction/" },
+          { "name": "TutorialsPoint - UML", "url": "https://www.tutorialspoint.com/uml/index.htm" },
+          { "name": "YouTube - SOLID Principles", "url": "https://www.youtube.com/watch?v=_j6-30-Cs-s" }
+        ],
+        "assignments": [
+          { "name": "Explain the 'S' and 'O' in SOLID", "url": "#" },
+          { "name": "Draw a Use Case diagram for an ATM", "url": "#" },
+          { "name": "Draw a Class diagram for a simple e-commerce system", "url": "#" }
+        ]
+      },
+      {
+        "id": 4,
+        "title": "Software Testing",
+        "description": "Learn different testing levels: Unit, Integration, System, and Acceptance.",
+        "resources": [
+          { "name": "GeeksforGeeks - Software Testing", "url": "https://www.geeksforgeeks.org/software-testing-basics/" },
+          { "name": "Javatpoint - Levels of Testing", "url": "https://www.javatpoint.com/levels-of-testing" },
+          { "name": "TutorialsPoint - Testing Levels", "url": "https://www.tutorialspoint.com/software_testing/testing_levels.htm" },
+          { "name": "YouTube - Software Testing Levels", "url": "https://www.youtube.com/watch?v=x0A-8cUp-j4" }
+        ],
+        "assignments": [
+          { "name": "Explain the difference between Unit and Integration testing", "url": "#" },
+          { "name": "Explain Black Box vs. White Box testing", "url": "#" }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Shell Scripting",
+    "learningId": "shell",
+    "icon": "",
+    "description": "Automate tasks and manage your system using the command line.",
+    "steps": [
+      {
+        "id": 1,
+        "title": "Basic Linux Commands",
+        "description": "Learn to navigate and manipulate files: `ls`, `cd`, `pwd`, `mkdir`, `rm`, `cp`, `mv`.",
+        "resources": [
+          { "name": "GeeksforGeeks - Basic Linux Commands", "url": "https://www.geeksforgeeks.org/basic-linux-commands/" },
+          { "name": "TutorialsPoint - Linux Commands", "url": "https://www.tutorialspoint.com/linux/linux_basic_commands.htm" },
+          { "name": "DigitalOcean - Linux Commands", "url": "https://www.digitalocean.com/community/tutorials/an-introduction-to-linux-basics" },
+          { "name": "YouTube - 100 Linux Commands", "url": "https://www.youtube.com/watch?v=ZtqBQ68cfJc" }
+        ],
+        "assignments": [
+          { "name": "Create a directory, move a file into it, and then delete the directory", "url": "#" },
+          { "name": "Explain the difference between `rm` and `rmdir`", "url": "#" }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Permissions & Processes",
+        "description": "Manage file permissions with `chmod` and control running processes with `ps`, `kill`, and `grep`.",
+        "resources": [
+          { "name": "GeeksforGeeks - File Permissions", "url": "https://www.geeksforgeeks.org/permissions-in-linux/" },
+          { "name": "GeeksforGeeks - `grep` Command", "url": "https://www.geeksforgeeks.org/grep-command-in-unix-linux/" },
+          { "name": "Javatpoint - `ps` command", "url": "https://www.javatpoint.com/linux-ps-command" },
+          { "name": "YouTube - Linux File Permissions (chmod)", "url": "https://www.youtube.com/watch?v=lpprG0-3-oM" }
+        ],
+        "assignments": [
+          { "name": "Set a file's permissions to `rwx-r--r--`", "url": "#" },
+          { "name": "Use `ps` and `grep` to find the Process ID of 'chrome'", "url": "#" }
+        ]
+      },
+      {
+        "id": 3,
+        "title": "Bash Scripting Basics",
+        "description": "Write your first scripts using variables, user input (`read`), and conditionals (`if-then-else`).",
+        "resources": [
+          { "name": "GeeksforGeeks - Bash Scripting", "url": "https://www.geeksforgeeks.org/bash-scripting/" },
+          { "name": "TutorialsPoint - Shell Scripting", "url": "https://www.tutorialspoint.com/unix/shell_scripting.htm" },
+          { "name": "Javatpoint - Bash If-Else", "url": "https://www.javatpoint.com/bash-if-else" },
+          { "name": "YouTube - Bash Scripting Full Course", "url": "https://www.youtube.com/watch?v=mSQM8Xo78Wc" }
+        ],
+        "assignments": [
+          { "name": "Write a script that asks for your name and prints 'Hello, [Name]'", "url": "#" },
+          { "name": "Write a script that checks if a file exists", "url": "#" }
+        ]
+      },
+      {
+        "id": 4,
+        "title": "Loops & Functions",
+        "description": "Learn to use `for` and `while` loops, and how to create reusable functions in Bash.",
+        "resources": [
+          { "name": "GeeksforGeeks - Bash Loops", "url": "https://www.geeksforgeeks.org/loops-in-shell-script/" },
+          { "name": "GeeksforGeeks - Bash Functions", "url": "https://www.geeksforgeeks.org/functions-in-shell-scripting/" },
+          { "name": "TutorialsPoint - Loops", "url": "https://www.tutorialspoint.com/unix/shell_loops.htm" },
+          { "name": "YouTube - Bash Loops", "url": "https://www.youtube.com/watch?v=aEm96vacnkw" }
+        ],
+        "assignments": [
+          { "name": "Write a script that prints numbers 1 to 10 using a `for` loop", "url": "#" },
+          { "name": "Write a script with a function that renames a file", "url": "#" },
+          { "name": "Create a simple backup script for a directory", "url": "#" }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Digital Electronics",
+    "learningId": "de",
+    "icon": "",
+    "description": "Learn the digital logic building blocks of modern computers.",
+    "steps": [
+      {
+        "id": 1,
+        "title": "Number Systems",
+        "description": "Understand and convert between Binary, Decimal, Octal, and Hexadecimal number systems.",
+        "resources": [
+          { "name": "GeeksforGeeks - Number Systems", "url": "https://www.geeksforgeeks.org/digital-electronics-logic-design-tutorials/" },
+          { "name": "Javatpoint - Number System", "url": "https://www.javatpoint.com/number-system-in-digital-electronics" },
+          { "name": "TutorialsPoint - Number Systems", "url": "https://www.tutorialspoint.com/digital_circuits/digital_circuits_number_systems.htm" },
+          { "name": "YouTube - Number Systems Intro", "url": "https://www.youtube.com/watch?v=N_2gl-Vba48" }
+        ],
+        "assignments": [
+          { "name": "Convert 100 (Decimal) to Binary", "url": "#" },
+          { "name": "Convert 110101 (Binary) to Hexadecimal", "url": "#" }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Logic Gates & Boolean Algebra",
+        "description": "Learn AND, OR, NOT, NAND, NOR, XOR, XNOR gates and laws of Boolean algebra.",
+        "resources": [
+          { "name": "GeeksforGeeks - Logic Gates", "url": "https://www.geeksforgeeks.org/logic-gates-in-digital-electronics/" },
+          { "name": "Javatpoint - Logic Gates", "url": "https://www.javatpoint.com/logic-gates" },
+          { "name": "TutorialsPoint - Logic Gates", "url": "https://www.tutorialspoint.com/digital_circuits/digital_circuits_logic_gates.htm" },
+          { "name": "YouTube - Logic Gates", "url": "https://www.youtube.com/watch?v=gI-qXk7XojA" }
+        ],
+        "assignments": [
+          { "name": "Implement an XOR gate using only NAND gates", "url": "#" },
+          { "name": "Simplify a Boolean expression using De Morgan's Law", "url": "#" }
+        ]
+      },
+      {
+        "id": 3,
+        "title": "Karnaugh Maps (K-Maps)",
+        "description": "Learn to simplify Boolean expressions visually using K-Maps (2, 3, and 4 variables).",
+        "resources": [
+          { "name": "GeeksforGeeks - K-Maps", "url": "https://www.geeksforgeeks.org/introduction-of-k-map-karnaugh-map/" },
+          { "name": "Javatpoint - K-Map", "url": "https://www.javatpoint.com/k-map" },
+          { "name": "TutorialsPoint - K-Maps", "url": "https://www.tutorialspoint.com/digital_circuits/digital_circuits_karnaugh_maps.htm" },
+          { "name": "YouTube - K-Maps Tutorial", "url": "https://www.youtube.com/watch?v=CpsxMU9S-wI" }
+        ],
+        "assignments": [
+          { "name": "Solve a 3-variable K-Map", "url": "#" },
+          { "name": "Solve a 4-variable K-Map", "url": "#" },
+          { "name": "Explain 'Don't Care' conditions", "url": "#" }
+        ]
+      },
+      {
+        "id": 4,
+        "title": "Combinational Circuits",
+        "description": "Learn circuits whose output depends only on the present input: Half/Full Adders, Multiplexers.",
+        "resources": [
+          { "name": "GeeksforGeeks - Half Adder", "url": "https://www.geeksforgeeks.org/half-adder-in-digital-logic/" },
+          { "name": "GeeksforGeeks - Multiplexer", "url": "https://www.geeksforgeeks.org/multiplexer-in-digital-logic/" },
+          { "name": "Javatpoint - Combinational Circuits", "url": "https://www.javatpoint.com/combinational-circuits" },
+          { "name": "YouTube - Combinational Circuits", "url": "https-://www.youtube.com/watch?v=g8-83a3-s-o" }
+        ],
+        "assignments": [
+          { "name": "Design a 4-to-1 Multiplexer", "url": "#" },
+          { "name": "Implement a Full Adder using two Half Adders", "url": "#" }
+        ]
+      },
+      {
+        "id": 5,
+        "title": "Sequential Circuits",
+        "description": "Learn circuits with memory: Flip-Flops (SR, JK, D, T), Registers, and Counters.",
+        "resources": [
+          { "name": "GeeksforGeeks - Flip-Flops", "url": "https://www.geeksforgeeks.org/flip-flop-in-digital-electronics/" },
+          { "name": "Javatpoint - Sequential Circuits", "url": "https://www.javatpoint.com/sequential-circuits" },
+          { "name": "TutorialsPoint - Counters", "url": "https://www.tutorialspoint.com/digital_circuits/digital_circuits_counters.htm" }
+        ],
+        "assignments": [
+          { "name": "Draw the logic diagram for a JK Flip-Flop", "url": "#" },
+          { "name":"Write the excitation table for a T Flip-Flop", "url": "#" },
+          { "name": "Design a 2-bit asynchronous counter", "url": "#" }
+        ]
+      }
+    ]
+  }
+]
