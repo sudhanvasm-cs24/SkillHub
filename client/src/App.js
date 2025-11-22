@@ -12,9 +12,9 @@ import {
 } from 'react-router-dom';
 import { 
   BookOpen, Map, Home, Youtube, Brain, Shield, Database, Code, Server, 
-  Network, Lock, Sigma, User, LogIn, UserPlus, Info, ChartNoAxesCombined, TvMinimalPlay,
+  Network, Lock, Sigma, User, Info, ChartNoAxesCombined, TvMinimalPlay,
   ArrowLeft, ExternalLink, Square, CheckSquare, Cpu, ListCheck, CodeXml, ArrowRight, BookmarkCheck,
-  Loader, 
+  Loader,
   // FIXED: Corrected names
   Puzzle, Globe, Calculator, MonitorDot, 
   ChevronLeft, ChevronRight, 
@@ -92,7 +92,7 @@ const reviews = [
   },
   { 
     name: "Srihari S Rao", 
-    img: "/Images/srihari.jpeg",
+    img: "/Images/srihari.jpg",
     course: "Cyber Security", 
     quote: "I learned essential security concepts and built my first analyzer." 
   }
@@ -245,10 +245,10 @@ function Footer() {
           <div>
             <h5 className="text-white font-semibold mb-4">Connect</h5>
             <div className="flex space-x-4">
-              <a href="#" className="bg-gray-800 p-2 rounded-lg hover:bg-blue-600 hover:text-white transition-all text-gray-300"><Facebook className="h-5 w-5" /></a>
-              <a href="#" className="bg-gray-800 p-2 rounded-lg hover:bg-pink-600 hover:text-white transition-all text-gray-300"><Instagram className="h-5 w-5" /></a>
-              <a href="#" className="bg-gray-800 p-2 rounded-lg hover:bg-blue-600 hover:text-white transition-all text-gray-300"><Twitter className="h-5 w-5" /></a>
-              <a href="#" className="bg-gray-800 p-2 rounded-lg hover:bg-blue-600 hover:text-white transition-all text-gray-300"><Linkedin className="h-5 w-5" /></a>
+              <a href="https://www.facebook.com/" className="bg-gray-800 p-2 rounded-lg hover:bg-blue-600 hover:text-white transition-all text-gray-300"><Facebook className="h-5 w-5" /></a>
+              <a href="https://www.instagram.com/" className="bg-gray-800 p-2 rounded-lg hover:bg-pink-600 hover:text-white transition-all text-gray-300"><Instagram className="h-5 w-5" /></a>
+              <a href="https://x.com/" className="bg-gray-800 p-2 rounded-lg hover:bg-blue-600 hover:text-white transition-all text-gray-300"><Twitter className="h-5 w-5" /></a>
+              <a href="https://www.linkedin.com/in/sudhanvasm/" className="bg-gray-800 p-2 rounded-lg hover:bg-blue-600 hover:text-white transition-all text-gray-300"><Linkedin className="h-5 w-5" /></a>
             </div>
           </div>
         </div>
@@ -532,6 +532,7 @@ function AuthForm({ title, buttonText, isRegister = false }) {
         </div>
         <form onSubmit={(e) => e.preventDefault()} className="space-y-4">
           {isRegister && <div><label className="block text-gray-300 text-sm font-medium mb-1 ml-1">Full Name</label><input type="text" className={styles.input} placeholder="John Doe" /></div>}
+          {isRegister && <div><label className="block text-gray-300 text-sm font-medium mb-1 ml-1">Phone Number</label><input type="tel" className={styles.input} placeholder="+91 XXXXX XXXXX" /></div>}
           <div><label className="block text-gray-300 text-sm font-medium mb-1 ml-1">Email Address</label><input type="email" className={styles.input} placeholder="you@example.com" /></div>
           <div><label className="block text-gray-300 text-sm font-medium mb-1 ml-1">Password</label><input type="password" className={styles.input} placeholder="•••••••••" /></div>
           <button className={styles.buttonPrimary + " w-full justify-center mt-4"}>{buttonText}</button>
@@ -672,17 +673,17 @@ function AboutPage() {
         <div className="bg-gray-800/50 rounded-2xl grid lg:grid-cols-4 p-8 border border-gray-700 items-center gap-6">
         {[
           { img: "/Images/sudhanva.png", name: "Sudhanva S M", desc: "Lead Developer & Student", gb: "https://github.com/SudhanvaSM/", li: "https://www.linkedin.com/in/sudhanvasm/" },
-          { img: "/Images/sumant.jpeg", name: "Sudhanva S M", desc: "Lead Developer & Student", gb: "https://github.com/SudhanvaSM/", li: "https://www.linkedin.com/in/sudhanvasm/" },
-          { img: "/Images/sathvik.jpg", name: "Sudhanva S M", desc: "Lead Developer & Student", gb: "https://github.com/SudhanvaSM/", li: "https://www.linkedin.com/in/sudhanvasm/" },
-          {img: "/Images/srihari.jpeg", name: "Sudhanva S M", desc: "Lead Developer & Student", gb: "https://github.com/SudhanvaSM/", li: "https://www.linkedin.com/in/sudhanvasm/"}
+          { img: "/Images/sumant.jpeg", name: "Sumant Shridhar", desc: "Lead Developer & Student", gb: "https://github.com/SudhanvaSM/", li: "https://www.linkedin.com/in/sudhanvasm/" },
+          { img: "/Images/sathvik.jpg", name: "Subraveti Sathvik", desc: "Lead Developer & Student", gb: "https://github.com/subravetics24-Vik/", li: "https://www.linkedin.com/in/sudhanvasm/" },
+          {img: "/Images/srihari.jpg", name: "Srihari S Rao", desc: "Lead Developer & Student", gb: "https://github.com/srihari-sys/", li: "https://www.linkedin.com/in/sudhanvasm/"}
         ].map((feature, idx) => (
           <div key={idx} className="bg-gray-900/50 backdrop-blur-md p-8 rounded-3xl border border-gray-800 hover:border-gray-700 transition-all text-center">
             <div className={`w-28 h-28 rounded-full ${feature.bg} mx-auto flex items-center justify-center mb-6`}>
-              <img src={feature.img} className={`h-24 w-24 rounded-full overflow-hidden border border-gray-900`} />
+              <img src={feature.img} alt="" className={`h-24 w-24 rounded-full overflow-hidden border border-gray-900`} />
             </div>
             <h3 className="text-xl font-bold text-white text-center mb-2">{feature.name}</h3>
             <p className="text-gray-300 text-center leading-relaxed">{feature.desc}</p>
-            <div className="grid md:grid-cols-2">
+            <div className="flex md:grid-cols-2 mt-4 gap-4 items-center justify-center">
               <a href={feature.gb} className="text-gray-300 hover:text-white"><Github className="h-5 w-5"/></a>
               <a href={feature.li} className="text-gray-300 hover:text-white"><Linkedin className="h-5 w-5"/></a>
             </div>
