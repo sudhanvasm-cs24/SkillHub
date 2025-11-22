@@ -17,5 +17,9 @@
   "bugs": {
     "url": "https://github.com/sudhanvasm-cs24/SkillHub/issues"
   },
-  "homepage": "https://github.com/sudhanvasm-cs24/SkillHub#readme"
+  "homepage": "https://github.com/sudhanvasm-cs24/SkillHub#readme",
+  "dependencies": {
+    "gsap": "^3.13.0",
+    "three": "^0.181.2"
+  }
 }
