@@ -294,7 +294,7 @@ function HomePage() {
             Explore Roadmaps <ArrowRight className="h-5 w-5"/>
           </button>
           <button onClick={() => navigate('/learning')} className={styles.buttonPrimary}>
-            Browse Topics
+            Browse Topics <ArrowRight className="h-5 w-5"/>
           </button>
         </div>
       </div>
