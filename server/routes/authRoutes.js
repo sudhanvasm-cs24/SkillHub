@@ -11,11 +11,26 @@ const generateToken = (id) => {
   });
 };
 
+// Simple email format check
+const isValidEmail = (email) => {
+  if (!email || typeof email !== 'string') return false;
+  const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\\.,;:\s@\"]+\.)+[^<>()[\]\\.,;:\s@\"]{2,})$/i;
+  return re.test(String(email).toLowerCase());
+};
+
 // @desc    Register a new user
 // @route   POST /api/auth/register
 // @access  Public
 router.post('/register', async (req, res) => {
   const { name, email, password } = req.body;
+
+  if (!name || !email || !password) {
+    return res.status(400).json({ message: 'Name, email and password are required' });
+  }
+
+  if (!isValidEmail(email)) {
+    return res.status(400).json({ message: 'Invalid email format' });
+  }
 
   try {
     const userExists = await User.findOne({ email });
@@ -51,6 +66,14 @@ router.post('/register', async (req, res) => {
 // @access  Public
 router.post('/login', async (req, res) => {
   const { email, password } = req.body;
+
+  if (!email || !password) {
+    return res.status(400).json({ message: 'Email and password are required' });
+  }
+
+  if (!isValidEmail(email)) {
+    return res.status(400).json({ message: 'Invalid email format' });
+  }
 
   try {
     const user = await User.findOne({ email });

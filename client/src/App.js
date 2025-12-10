@@ -4,6 +4,8 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 import FloatingLines from './FloatingLines';
+import { AuthProvider, useAuth } from './contexts/AuthContext';
+import { ProtectedRoute } from './contexts/ProtectedRoute';
 
 // NEW: Import React Router components
 import { 
@@ -181,6 +183,7 @@ const SlickArrow = ({ onClick, direction }) => {
 
 function Navbar() {
   const { pathname } = useLocation();
+  const { isAuthenticated, user, logout } = useAuth();
   const navItems = [
     { id: '/', label: 'Home', icon: Home },
     { id: '/roadmaps', label: 'Roadmaps', icon: Map },
@@ -210,11 +213,27 @@ function Navbar() {
       </div>
 
       <div className="flex items-center space-x-3">
-        <Link to="/login" className="hidden sm:block text-gray-300 hover:text-white text-md font-medium px-3 py-2 transition-colors">Login</Link>
-        <Link to="/register" className="bg-white text-gray-900 px-5 py-2.5 rounded-full hover:bg-gray-300 transition-all shadow-lg flex items-center space-x-2 font-semibold text-base">
-          <span className="hidden sm:inline">Get Started</span> <ArrowRight className="h-4 w-4"/>
-        </Link>
-        <Link to="/profile" className="bg-gray-800 p-2 rounded-full hover:bg-gray-700 border border-gray-700 transition-colors"><User className="h-5 w-5 text-blue-400" /></Link>
+        {isAuthenticated ? (
+          <>
+            <span className="hidden sm:block text-gray-300 text-md font-medium">{user?.name}</span>
+            <button 
+              onClick={logout} 
+              className="hidden sm:block text-gray-300 hover:text-white text-md font-medium px-3 py-2 transition-colors"
+            >
+              Logout
+            </button>
+          </>
+        ) : (
+          <>
+            <Link to="/login" className="hidden sm:block text-gray-300 hover:text-white text-md font-medium px-3 py-2 transition-colors">Login</Link>
+            <Link to="/register" className="bg-white text-gray-900 px-5 py-2.5 rounded-full hover:bg-gray-300 transition-all shadow-lg flex items-center space-x-2 font-semibold text-base">
+              <span className="hidden sm:inline">Get Started</span> <ArrowRight className="h-4 w-4"/>
+            </Link>
+          </>
+        )}
+        {isAuthenticated && (
+          <Link to="/profile" className="bg-gray-800 p-2 rounded-full hover:bg-gray-700 border border-gray-700 transition-colors"><User className="h-5 w-5 text-blue-400" /></Link>
+        )}
       </div>
     </nav>
   );
@@ -265,6 +284,7 @@ function Footer() {
 function HomePage() {
   const navigate = useNavigate();
   const { reviews } = useOutletContext();
+  const { isAuthenticated } = useAuth();
 
   const carouselSettings = {
     dots: true, infinite: true, speed: 800, slidesToShow: 3, slidesToScroll: 1, autoplay: true, autoplaySpeed: 5000,
@@ -290,10 +310,10 @@ function HomePage() {
         </p>
         
         <div className="flex flex-col sm:flex-row justify-center gap-4">
-          <button onClick={() => navigate('/roadmaps')} className={styles.buttonPrimary}>
+          <button onClick={() => isAuthenticated ? navigate('/roadmaps') : navigate('/login')} className={styles.buttonPrimary}>
             Explore Roadmaps <ArrowRight className="h-5 w-5"/>
           </button>
-          <button onClick={() => navigate('/learning')} className={styles.buttonPrimary}>
+          <button onClick={() => isAuthenticated ? navigate('/learning') : navigate('/login')} className={styles.buttonPrimary}>
             Browse Topics <ArrowRight className="h-5 w-5"/>
           </button>
         </div>
@@ -349,7 +369,7 @@ function HomePage() {
             <p className="text-gray-300 text-lg mb-8 leading-relaxed">
               From HTML basics to advanced React & Node.js. This is the complete guide to becoming a modern web developer in 2024.
             </p>
-            <button onClick={() => navigate('/roadmaps/web')} className={styles.buttonPrimary}>
+            <button onClick={() => isAuthenticated ? navigate('/roadmaps/web') : navigate('/login')} className={styles.buttonPrimary}>
               Start This Path <ArrowRight className="h-5 w-5"/>
             </button>
           </div>
@@ -520,6 +540,44 @@ function DetailPage({ type }) {
 
 function AuthForm({ title, buttonText, isRegister = false }) {
   const navigate = useNavigate();
+  const { register, login, loading, error } = useAuth();
+  const [formData, setFormData] = useState({ name: '', email: '', password: '' });
+  const [formError, setFormError] = useState('');
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const validateEmail = (email) => {
+    return /\S+@\S+\.\S+/.test(email);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setFormError('');
+
+    if (!formData.email || !formData.password || (isRegister && !formData.name)) {
+      setFormError('Please fill in all fields');
+      return;
+    }
+
+    if (!validateEmail(formData.email)) {
+      setFormError('Please enter a valid email address');
+      return;
+    }
+
+    const result = isRegister
+      ? await register(formData.name, formData.email, formData.password)
+      : await login(formData.email, formData.password);
+
+    if (result.success) {
+      navigate('/profile');
+    } else {
+      setFormError(result.error);
+    }
+  };
+
   return (
     <div className="flex justify-center items-center pt-32 pb-20 px-4">
       <div className="w-full max-w-md bg-gray-900/80 backdrop-blur-md rounded-3xl shadow-2xl p-8 border border-gray-800">
@@ -530,16 +588,60 @@ function AuthForm({ title, buttonText, isRegister = false }) {
            <h2 className="text-3xl font-bold text-white">{title}</h2>
            <p className="text-gray-300 text-md mt-2">Welcome to SkillHub</p>
         </div>
-        <form onSubmit={(e) => e.preventDefault()} className="space-y-4">
-          {isRegister && <div><label className="block text-gray-300 text-sm font-medium mb-1 ml-1">Full Name</label><input type="text" className={styles.input} placeholder="John Doe" /></div>}
-          {isRegister && <div><label className="block text-gray-300 text-sm font-medium mb-1 ml-1">Phone Number</label><input type="tel" className={styles.input} placeholder="+91 XXXXX XXXXX" /></div>}
-          <div><label className="block text-gray-300 text-sm font-medium mb-1 ml-1">Email Address</label><input type="email" className={styles.input} placeholder="you@example.com" /></div>
-          <div><label className="block text-gray-300 text-sm font-medium mb-1 ml-1">Password</label><input type="password" className={styles.input} placeholder="•••••••••" /></div>
-          <button className={styles.buttonPrimary + " w-full justify-center mt-4"}>{buttonText}</button>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          {(formError || error) && (
+            <div className="bg-red-500/10 border border-red-500/50 rounded-lg p-3">
+              <p className="text-red-400 text-sm">{formError || error}</p>
+            </div>
+          )}
+          {isRegister && (
+            <div>
+              <label className="block text-gray-300 text-sm font-medium mb-1 ml-1">Full Name</label>
+              <input 
+                type="text" 
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                className={styles.input} 
+                placeholder="John Doe" 
+              />
+            </div>
+          )}
+          <div>
+            <label className="block text-gray-300 text-sm font-medium mb-1 ml-1">Email Address</label>
+            <input 
+              type="email" 
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              className={styles.input} 
+              placeholder="you@example.com" 
+            />
+          </div>
+          <div>
+            <label className="block text-gray-300 text-sm font-medium mb-1 ml-1">Password</label>
+            <input 
+              type="password" 
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              className={styles.input} 
+              placeholder="•••••••••" 
+            />
+          </div>
+          <button 
+            className={styles.buttonPrimary + " w-full justify-center mt-4 disabled:opacity-50 disabled:cursor-not-allowed"}
+            disabled={loading}
+          >
+            {loading ? 'Processing...' : buttonText}
+          </button>
         </form>
         <p className="text-center mt-8 text-gray-300 text-sm">
           {isRegister ? "Already have an account?" : "Don't have an account?"} 
-          <span className="text-blue-400 cursor-pointer hover:underline ml-1 font-medium" onClick={() => navigate(isRegister ? '/login' : '/register')}>
+          <span 
+            className="text-blue-400 cursor-pointer hover:underline ml-1 font-medium" 
+            onClick={() => navigate(isRegister ? '/login' : '/register')}
+          >
             {isRegister ? 'Login' : 'Register'}
           </span>
         </p>
@@ -699,14 +801,17 @@ function Layout() {
   const [progressData, setProgressData] = useState({});
   const [data, setData] = useState({ roadmaps: [], learningItems: [], reviews: [] });
   const [isLoading, setIsLoading] = useState(true);
+  const { token, isAuthenticated } = useAuth();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
+        const headers = token ? { 'Authorization': `Bearer ${token}` } : {};
         const [r, l, v] = await Promise.all([
-          fetch('http://localhost:5000/api/content/roadmaps'),
-          fetch('http://localhost:5000/api/content/learning'),
-          fetch('http://localhost:5000/api/content/reviews')
+          fetch('http://localhost:5000/api/content/roadmaps', { headers }),
+          fetch('http://localhost:5000/api/content/learning', { headers }),
+          fetch('http://localhost:5000/api/content/reviews', { headers })
         ]);
         const roadmapsData = r.ok ? await r.json() : [];
         const learningData = l.ok ? await l.json() : [];
@@ -721,14 +826,71 @@ function Layout() {
       }
     };
     fetchData();
-  }, []);
+  }, [token]);
 
-  const onToggleComplete = (stepId) => {
+  // When user is authenticated, fetch their saved progress
+  useEffect(() => {
+    const fetchProgress = async () => {
+      if (!token) {
+        setProgressData({});
+        return;
+      }
+      try {
+        const res = await fetch('http://localhost:5000/api/progress', {
+          headers: { 'Authorization': `Bearer ${token}` }
+        });
+        if (res.ok) {
+          const json = await res.json();
+          const completed = json.completedSteps || [];
+          const map = {};
+          completed.forEach(id => { map[id] = true; });
+          setProgressData(map);
+        }
+      } catch (err) {
+        console.error('Failed to fetch progress', err);
+      }
+    };
+    fetchProgress();
+  }, [token, isAuthenticated]);
+
+  const onToggleComplete = async (stepId) => {
+    // If not authenticated, send user to login
+    if (!token) {
+      navigate('/login');
+      return;
+    }
+
+    // Optimistic UI update
     setProgressData(prev => {
       const newP = { ...prev };
       if (newP[stepId]) delete newP[stepId]; else newP[stepId] = true;
       return newP;
     });
+
+    try {
+      const res = await fetch('http://localhost:5000/api/progress/toggle', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+        body: JSON.stringify({ stepId })
+      });
+
+      if (!res.ok) {
+        // Revert optimistic change on error
+        setProgressData(prev => {
+          const newP = { ...prev };
+          if (newP[stepId]) delete newP[stepId]; else newP[stepId] = true;
+          return newP;
+        });
+      } else {
+        const json = await res.json();
+        const completed = json.completedSteps || [];
+        const map = {};
+        completed.forEach(id => { map[id] = true; });
+        setProgressData(map);
+      }
+    } catch (err) {
+      console.error('Failed to toggle progress', err);
+    }
   };
 
   const totalSteps = 
@@ -771,22 +933,24 @@ function Layout() {
 
 export default function App() {
   return (
-    <BrowserRouter>
-      <ScrollToTop />
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<HomePage />} />
-          <Route path="about" element={<AboutPage />} />
-          <Route path="roadmaps" element={<RoadmapsPage />} />
-          <Route path="roadmaps/:roadmapId" element={<DetailPage type="roadmap" />} />
-          <Route path="learning" element={<LearningPage />} />
-          <Route path="learning/:learningId" element={<DetailPage type="learning" />} />
-          <Route path="login" element={<AuthForm title="Login" buttonText="Login" />} />
-          <Route path="register" element={<AuthForm title="Register" buttonText="Create Account" isRegister />} />
-          <Route path="profile" element={<ProfilePage />} />
-          <Route path="*" element={<HomePage />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <AuthProvider>
+      <BrowserRouter>
+        <ScrollToTop />
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<HomePage />} />
+            <Route path="about" element={<AboutPage />} />
+            <Route path="roadmaps" element={<ProtectedRoute><RoadmapsPage /></ProtectedRoute>} />
+            <Route path="roadmaps/:roadmapId" element={<ProtectedRoute><DetailPage type="roadmap" /></ProtectedRoute>} />
+            <Route path="learning" element={<ProtectedRoute><LearningPage /></ProtectedRoute>} />
+            <Route path="learning/:learningId" element={<ProtectedRoute><DetailPage type="learning" /></ProtectedRoute>} />
+            <Route path="login" element={<AuthForm title="Login" buttonText="Login" />} />
+            <Route path="register" element={<AuthForm title="Register" buttonText="Create Account" isRegister />} />
+            <Route path="profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
+            <Route path="*" element={<HomePage />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
   );
 }
