@@ -651,14 +651,15 @@ function AuthForm({ title, buttonText, isRegister = false }) {
 }
 
 function ProfilePage() {
-  const { progressData, totalSteps } = useOutletContext();
+  const { user } = useAuth();
+  const { progressData, totalSteps} = useOutletContext();
   const completedCount = Object.keys(progressData).length;
   const progress = totalSteps > 0 ? Math.round((completedCount / totalSteps) * 100) : 0;
 
   // Mock Gamification
   const level = Math.floor(completedCount / 5) + 1;
   const xp = completedCount * 100;
-  const streak = 4; 
+  const streak = progress; 
 
   return (
     <div className={styles.pageContainer}>
@@ -666,11 +667,11 @@ function ProfilePage() {
       {/* Profile Header */}
       <div className="mt-8 bg-gradient-to-r from-gray-900 to-gray-800 rounded-3xl p-8 border border-gray-800 shadow-2xl mb-8 flex flex-col md:flex-row items-center md:items-start backdrop-blur-lg gap-8">
         <div className="w-32 h-32 bg-gray-700 rounded-full p-1 border-4 border-gray-800 shadow-xl relative">
-           <img src={`https://api.dicebear.com/7.x/avataaars/svg?seed=Felix`} alt="avatar" className="w-full h-full rounded-full bg-gray-800" />
+           <img src={`/Images/avatar.png`} alt="avatar" className="w-full h-full rounded-full bg-gray-800" />
            <div className="absolute bottom-0 right-0 bg-blue-500 text-white text-xs font-bold px-2 py-1 rounded-full border-4 border-gray-800">LVL {level}</div>
         </div>
         <div className="text-center md:text-left flex-grow">
-          <h2 className="text-3xl font-bold text-white mb-2">Student User</h2>
+          <h2 className="text-3xl font-bold text-white mb-2">{user?.name || "Student User"}</h2>
           <p className="text-gray-300 mb-6">Computer Science • Batch 2025</p>
           
           {/* Stats Grid */}
@@ -758,9 +759,9 @@ function AboutPage() {
           <h3 className="text-2xl font-bold text-white mb-6 text-center">Built With MERN</h3>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {[
-              {n: "MongoDB", i: Database, c: "text-green-500/100", b: "bg-green-500/100"}, {n: "Express", i: Server}, 
-              {n: "React", i: CodeXml}, {n: "Node.js", i: Cpu},
-              {n: "Tailwind", i: Code}, {n: "React Router", i: Map},
+              {n: "MongoDB", i: Database, c: "text-green-500/100", b: "bg-green-500/100"}, {n: "Express.js", i: Server}, 
+              {n: "React.js", i: CodeXml}, {n: "Node.js", i: Cpu},
+              {n: "Tailwind CSS", i: Code}, {n: "React Router", i: Map},
               {n: "Lucide", i: Star}, {n: "Vite", i: Zap}
             ].map((t, i) => (
               <div key={i} className="bg-gray-800 p-4 rounded-xl flex items-center justify-center gap-3 border border-gray-700 hover:border-blue-500 transition-all group">
@@ -774,10 +775,10 @@ function AboutPage() {
         {/* Creator */}
         <div className="bg-gray-800/50 rounded-2xl grid lg:grid-cols-4 p-8 border border-gray-700 items-center gap-6">
         {[
-          { img: "/Images/sudhanva.png", name: "Sudhanva S M", desc: "Lead Developer & Student", gb: "https://github.com/SudhanvaSM/", li: "https://www.linkedin.com/in/sudhanvasm/" },
-          { img: "/Images/sumant.jpeg", name: "Sumant Shridhar", desc: "Lead Developer & Student", gb: "https://github.com/SudhanvaSM/", li: "https://www.linkedin.com/in/sudhanvasm/" },
-          { img: "/Images/sathvik.jpg", name: "Subraveti Sathvik", desc: "Lead Developer & Student", gb: "https://github.com/subravetics24-Vik/", li: "https://www.linkedin.com/in/sudhanvasm/" },
-          {img: "/Images/srihari.jpg", name: "Srihari S Rao", desc: "Lead Developer & Student", gb: "https://github.com/srihari-sys/", li: "https://www.linkedin.com/in/sudhanvasm/"}
+          { img: "/Images/sudhanva.png", name: "Sudhanva S M", desc: "Lead Developer & Student", gb: "https://github.com/sudhanvasm-cs24/", li: "https://www.linkedin.com/in/sudhanvasm/" },
+          { img: "/Images/sumant.jpeg", name: "Sumant Shridhar", desc: "Associate Developer & Student", gb: "https://github.com/sumantshridhar", li: "https://www.linkedin.com/in/sumant-shridhar-52598837b/" },
+          { img: "/Images/sathvik.jpg", name: "Subraveti Sathvik", desc: "Junior Developer & Student", gb: "https://github.com/subravetics24-Vik/", li: "https://www.linkedin.com/in/sathvik-subraveti-6081bb332" },
+          {img: "/Images/srihari.jpg", name: "Srihari S Rao", desc: "Senior Developer & Student", gb: "https://github.com/srihari-sys/", li: "https://www.linkedin.com/in/srihari-s-rao-a1772a8347/"}
         ].map((feature, idx) => (
           <div key={idx} className="bg-gray-900/50 backdrop-blur-md p-8 rounded-3xl border border-gray-800 hover:border-gray-700 transition-all text-center">
             <div className={`w-28 h-28 rounded-full ${feature.bg} mx-auto flex items-center justify-center mb-6`}>
@@ -810,12 +811,11 @@ function Layout() {
         const headers = token ? { 'Authorization': `Bearer ${token}` } : {};
         const [r, l, v] = await Promise.all([
           fetch('http://localhost:5000/api/content/roadmaps', { headers }),
-          fetch('http://localhost:5000/api/content/learning', { headers }),
-          fetch('http://localhost:5000/api/content/reviews', { headers })
+          fetch('http://localhost:5000/api/content/learning', { headers })
         ]);
         const roadmapsData = r.ok ? await r.json() : [];
         const learningData = l.ok ? await l.json() : [];
-        const reviewsData = v.ok ? await v.json() : reviews; // Fallback to local reviews
+        const reviewsData =  reviews; // Fallback to local reviews
         setData({ roadmaps: roadmapsData, learningItems: learningData, reviews: reviewsData });
       } catch (e) { 
         console.error(e);
