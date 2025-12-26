@@ -1,6 +1,7 @@
 import express from 'express';
 import User from '../models/userModel.js';
 import jwt from 'jsonwebtoken';
+import protect from '../middleware/authMiddleware.js';
 
 const router = express.Router();
 
@@ -89,6 +90,61 @@ router.post('/login', async (req, res) => {
     } else {
       res.status(401).json({ message: 'Invalid email or password' });
     }
+  } catch (error) {
+    res.status(500).json({ message: `Server Error: ${error.message}` });
+  }
+});
+
+// @desc    Update user profile (name/email)
+// @route   PUT /api/auth/update
+// @access  Private
+router.put('/update', protect, async (req, res) => {
+  const { name, email } = req.body;
+
+  try {
+    const user = await User.findById(req.user._id);
+    if (!user) return res.status(404).json({ message: 'User not found' });
+
+    if (email && email !== user.email) {
+      // Check if new email is already taken
+      const existing = await User.findOne({ email });
+      if (existing) return res.status(400).json({ message: 'Email already in use' });
+      user.email = email.toLowerCase();
+    }
+
+    if (name) user.name = name;
+
+    const updated = await user.save();
+
+    res.json({ _id: updated._id, name: updated.name, email: updated.email, completedSteps: updated.completedSteps });
+  } catch (error) {
+    res.status(500).json({ message: `Server Error: ${error.message}` });
+  }
+});
+
+// @desc    Change user password
+// @route   PUT /api/auth/password
+// @access  Private
+router.put('/password', protect, async (req, res) => {
+  const { currentPassword, newPassword } = req.body;
+
+  if (!currentPassword || !newPassword) {
+    return res.status(400).json({ message: 'Current and new password are required' });
+  }
+
+  try {
+    // Include password for verification
+    const user = await User.findById(req.user._id);
+    if (!user) return res.status(404).json({ message: 'User not found' });
+
+    if (!(await user.matchPassword(currentPassword))) {
+      return res.status(401).json({ message: 'Current password is incorrect' });
+    }
+
+    user.password = newPassword; // Will be hashed by pre('save') hook
+    await user.save();
+
+    res.json({ message: 'Password updated successfully' });
   } catch (error) {
     res.status(500).json({ message: `Server Error: ${error.message}` });
   }

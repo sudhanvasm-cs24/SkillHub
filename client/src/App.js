@@ -218,7 +218,7 @@ function Navbar() {
             <span className="hidden sm:block text-gray-300 text-md font-medium">{user?.name}</span>
             <button 
               onClick={logout} 
-              className="hidden sm:block text-gray-300 hover:text-white text-md font-medium px-3 py-2 transition-colors"
+              className="hidden sm:block text-gray-300 hover:text-red-400 text-md font-medium px-3 py-2 transition-colors"
             >
               Logout
             </button>
@@ -651,7 +651,7 @@ function AuthForm({ title, buttonText, isRegister = false }) {
 }
 
 function ProfilePage() {
-  const { user } = useAuth();
+  const { user, updateProfile, changePassword } = useAuth();
   const { progressData, totalSteps} = useOutletContext();
   const completedCount = Object.keys(progressData).length;
   const progress = totalSteps > 0 ? Math.round((completedCount / totalSteps) * 100) : 0;
@@ -659,7 +659,104 @@ function ProfilePage() {
   // Mock Gamification
   const level = Math.floor(completedCount / 5) + 1;
   const xp = completedCount * 100;
-  const streak = progress; 
+  const streak = progress;
+
+  // Local UI state for update forms
+  const [showUpdate, setShowUpdate] = React.useState(false);
+  const [showPassword, setShowPassword] = React.useState(false);
+  const [updateForm, setUpdateForm] = React.useState({ name: user?.name || '', email: user?.email || '' });
+  const [pwdForm, setPwdForm] = React.useState({ currentPassword: '', newPassword: '', confirmPassword: '' });
+  const [msg, setMsg] = React.useState(null);
+  const [pwdError, setPwdError] = React.useState(null);
+  const [loadingAction, setLoadingAction] = React.useState(false);
+
+  const handleUpdateSubmit = async (e) => {
+    e.preventDefault();
+    setMsg(null);
+    setLoadingAction(true);
+    const res = await updateProfile(updateForm.name, updateForm.email);
+    if (res.success) {
+      setMsg({ type: 'success', text: 'Profile updated successfully.' });
+      setShowUpdate(false);
+    } else {
+      setMsg({ type: 'error', text: res.error || 'Failed to update profile.' });
+    }
+    setLoadingAction(false);
+  };
+
+  const handlePasswordSubmit = async (e) => {
+    e.preventDefault();
+    setMsg(null);
+    setPwdError(null);
+    if (pwdForm.newPassword !== pwdForm.confirmPassword) {
+      setMsg({ type: 'error', text: 'New passwords do not match.' });
+      return;
+    }
+    setLoadingAction(true);
+
+    let res;
+    try {
+      res = await changePassword(pwdForm.currentPassword, pwdForm.newPassword);
+      console.log('changePassword result:', res);
+    } catch (err) {
+      // Shouldn't normally happen because changePassword catches, but guard anyway
+      console.error('changePassword threw:', err);
+      const text = err?.message || 'Failed to change password.';
+      setMsg({ type: 'error', text });
+      setPwdError(text);
+      setLoadingAction(false);
+      return;
+    }
+
+    // Defensive handling if response is missing or malformed
+    if (!res || typeof res !== 'object') {
+      const text = 'Failed to change password.';
+      setMsg({ type: 'error', text });
+      setPwdError(text);
+      setLoadingAction(false);
+      return;
+    }
+
+    // If server indicates success
+    if (res.success) {
+      setMsg({ type: 'success', text: res.message || 'Password changed successfully.' });
+      setPwdError(null);
+      setShowPassword(false);
+      setPwdForm({ currentPassword: '', newPassword: '', confirmPassword: '' });
+      setLoadingAction(false);
+      return;
+    }
+
+    // Otherwise map known cases to a clear inline message
+    let errText = res.error || 'Failed to change password.';
+    const errMsg = (res.error || '').toString();
+
+    const wrongPwdRegex = /current|incorrect|wrong password|invalid current|incorrect password|current password is incorrect/i;
+
+    // Show explicit alert when server indicates incorrect current password or 401
+    if (res.status === 401 || wrongPwdRegex.test(errMsg)) {
+      errText = 'The password entered is incorrect. Please try again.';
+      try { window.alert(errText); } catch (e) { /* ignore in non-browser env */ }
+    } else if (/failed to fetch|network|timeout/i.test(errMsg)) {
+      // Network related error
+      errText = 'Network error while changing password. Please check your connection and try again.';
+      try { window.alert(errText); } catch (e) { /* ignore */ }
+    } else if (!res.status && res.error && res.error.toString().toLowerCase().includes('password')) {
+      // Generic failure mentioning password - surface it
+      try { window.alert(errText); } catch (e) { /* ignore */ }
+    }
+
+    if (!errText) errText = 'Failed to change password.';
+
+    // Append status for debugging visibility if present
+    const statusSuffix = res.status ? ` (status ${res.status})` : '';
+    const fullErrText = `${errText}${statusSuffix}`;
+
+    setMsg({ type: 'error', text: fullErrText });
+    setPwdError(fullErrText);
+    setLoadingAction(false);
+  };
+
 
   return (
     <div className={styles.pageContainer}>
@@ -673,7 +770,57 @@ function ProfilePage() {
         <div className="text-center md:text-left flex-grow">
           <h2 className="text-3xl font-bold text-white mb-2">{user?.name || "Student User"}</h2>
           <p className="text-gray-300 mb-6">Computer Science • Batch 2025</p>
-          
+
+          <div className="flex items-center gap-3 mb-4 justify-center md:justify-start">
+            <button
+              className="px-3 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-md font-medium"
+              onClick={() => { setShowUpdate(!showUpdate); setShowPassword(false); setMsg(null); setUpdateForm({ name: user?.name || '', email: user?.email || '' }); }}
+            >
+              Update Profile
+            </button>
+            <button
+              className="px-3 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-md font-medium border border-gray-700"
+              onClick={() => { setShowPassword(!showPassword); setShowUpdate(false); setMsg(null); setPwdError(null); setPwdForm({ currentPassword: '', newPassword: '', confirmPassword: '' }); }}
+            >
+              Change Password
+            </button>
+          </div>
+
+          {msg && (
+            <div className={`mb-4 p-3 rounded-md ${msg.type === 'success' ? 'bg-green-800 text-green-200' : 'bg-red-800 text-red-200'}`}>
+              {msg.text}
+            </div>
+          )}
+
+          {showUpdate && (
+            <form onSubmit={handleUpdateSubmit} className="mb-6 bg-gray-800 p-4 rounded-md border border-gray-700">
+              <label className="block text-sm text-gray-300 mb-2">Name</label>
+              <input className="w-full mb-3 p-2 rounded bg-gray-900 border border-gray-700 text-white" value={updateForm.name} onChange={(e) => setUpdateForm({...updateForm, name: e.target.value})} />
+              <label className="block text-sm text-gray-300 mb-2">Email</label>
+              <input className="w-full mb-3 p-2 rounded bg-gray-900 border border-gray-700 text-white" value={updateForm.email} onChange={(e) => setUpdateForm({...updateForm, email: e.target.value})} />
+              <div className="flex gap-2">
+                <button type="submit" className="px-3 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-md" disabled={loadingAction}>{loadingAction ? 'Saving...' : 'Save'}</button>
+                <button type="button" className="px-3 py-2 bg-gray-700 hover:bg-gray-600 text-white rounded-md" onClick={() => setShowUpdate(false)}>Cancel</button>
+              </div>
+            </form>
+          )}
+
+          {showPassword && (
+            <form onSubmit={handlePasswordSubmit} className="mb-6 bg-gray-800 p-4 rounded-md border border-gray-700">
+              <label className="block text-sm text-gray-300 mb-2">Current Password</label>
+              <input type="password" className="w-full mb-3 p-2 rounded bg-gray-900 border border-gray-700 text-white" value={pwdForm.currentPassword} onChange={(e) => setPwdForm({...pwdForm, currentPassword: e.target.value})} />
+              {pwdError && <div className="mb-3 p-2 rounded bg-red-800 text-red-100 text-sm">{pwdError}</div>}
+              <label className="block text-sm text-gray-300 mb-2">New Password</label>
+              <input type="password" className="w-full mb-3 p-2 rounded bg-gray-900 border border-gray-700 text-white" value={pwdForm.newPassword} onChange={(e) => setPwdForm({...pwdForm, newPassword: e.target.value})} />
+              <label className="block text-sm text-gray-300 mb-2">Confirm New Password</label>
+              <input type="password" className="w-full mb-3 p-2 rounded bg-gray-900 border border-gray-700 text-white" value={pwdForm.confirmPassword} onChange={(e) => setPwdForm({...pwdForm, confirmPassword: e.target.value})} />
+              <div className="flex gap-2">
+                <button type="submit" className="px-3 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-md" disabled={loadingAction}>{loadingAction ? 'Saving...' : 'Change Password'}</button>
+                <button type="button" className="px-3 py-2 bg-gray-700 hover:bg-gray-600 text-white rounded-md" onClick={() => setShowPassword(false)}>Cancel</button>
+              </div>
+            </form>
+          )}
+
           {/* Stats Grid */}
           <div className="grid grid-cols-3 gap-4">
              <div className="bg-gray-800/50 rounded-xl p-3 border border-gray-700">

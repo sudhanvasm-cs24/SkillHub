@@ -76,6 +76,59 @@ export function AuthProvider({ children }) {
     }
   }, []);
 
+  const updateProfile = useCallback(async (name, email) => {
+    setLoading(true);
+    setError(null);
+    try {
+      const res = await fetch('http://localhost:5000/api/auth/update', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ name, email }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.message || 'Profile update failed');
+
+      const userObj = { _id: data._id, name: data.name, email: data.email, completedSteps: data.completedSteps };
+      localStorage.setItem('user', JSON.stringify(userObj));
+      setUser(userObj);
+      return { success: true, user: userObj };
+    } catch (err) {
+      setError(err.message || 'Update failed');
+      return { success: false, error: err.message };
+    } finally {
+      setLoading(false);
+    }
+  }, [token]);
+
+  const changePassword = useCallback(async (currentPassword, newPassword) => {
+    setLoading(true);
+    setError(null);
+    try {
+      const res = await fetch('http://localhost:5000/api/auth/password', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ currentPassword, newPassword }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        // Return structured error so callers can react to HTTP status codes
+        return { success: false, error: data.message || 'Password change failed', status: res.status };
+      }
+      return { success: true, message: data.message };
+    } catch (err) {
+      setError(err.message || 'Password change failed');
+      return { success: false, error: err.message };
+    } finally {
+      setLoading(false);
+    }
+  }, [token]);
+
   const logout = useCallback(() => {
     localStorage.removeItem('authToken');
     localStorage.removeItem('user');
@@ -85,7 +138,7 @@ export function AuthProvider({ children }) {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, token, loading, error, register, login, logout, isAuthenticated: !!user && !!token }}>
+    <AuthContext.Provider value={{ user, token, loading, error, register, login, logout, updateProfile, changePassword, isAuthenticated: !!user && !!token }}>
       {children}
     </AuthContext.Provider>
   );
