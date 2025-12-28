@@ -18,7 +18,7 @@ connectDB();
 
 app.use(cors({
   origin: [
-    "https://skill-7xewmjmaf-sudhanvasm-cs24s-projects.vercel.app"
+    "skillhub-dr6nsokau-sudhanvasm-cs24s-projects.vercel.app"
   ],
   credentials: true
 }));
