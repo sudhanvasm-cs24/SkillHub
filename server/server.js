@@ -16,12 +16,25 @@ const app = express();
 // Connect to database
 connectDB();
 
+const allowedOrigins = [
+  "https://skillhub-wheat.vercel.app",
+  "http://localhost:3000"
+];
+
 app.use(cors({
-  origin: [
-    "https://skillhub-wheat.vercel.app/register"
-  ],
+  origin: function (origin, callback) {
+    if (!origin) return callback(null, true);
+
+    if (allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("CORS not allowed"), false);
+    }
+  },
   credentials: true
 }));
+
+app.options("*", cors());
 
 
 // Enable CORS (Cross-Origin Resource Sharing)
