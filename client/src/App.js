@@ -956,7 +956,7 @@ function Layout() {
     const fetchData = async () => {
       try {
         const headers = token ? { 'Authorization': `Bearer ${token}` } : {};
-        const [r, l, v] = await Promise.all([
+        const [r, l] = await Promise.all([
           fetch('http://localhost:5000/api/content/roadmaps', { headers }),
           fetch('http://localhost:5000/api/content/learning', { headers })
         ]);
