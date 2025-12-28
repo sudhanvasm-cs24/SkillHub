@@ -945,7 +945,7 @@ function AboutPage() {
   );
 }
 
-function Layout() {
+function Layout() { 
   const [progressData, setProgressData] = useState({});
   const [data, setData] = useState({ roadmaps: [], learningItems: [], reviews: [] });
   const [isLoading, setIsLoading] = useState(true);
