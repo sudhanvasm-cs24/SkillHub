@@ -953,10 +953,6 @@ function Layout() {
   const navigate = useNavigate();
   const API_BASE = "https://skill-hub-1h3a.onrender.com";
 
-  fetch(`${API_BASE}/api/users`)
-  .then(res => res.json())
-  .then(data => console.log(data));
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -1020,7 +1016,7 @@ function Layout() {
     });
 
     try {
-      const res = await fetch(`${API_BASE}api/progress/toggle`, {
+      const res = await fetch(`${API_BASE}/api/progress/toggle`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
         body: JSON.stringify({ stepId })
