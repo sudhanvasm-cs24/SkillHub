@@ -11,6 +11,8 @@ import progressRoutes from './routes/progressRoutes.js';
 // Load env vars
 dotenv.config();
 
+const app = express();
+
 // Connect to database
 connectDB();
 
