@@ -951,6 +951,11 @@ function Layout() {
   const [isLoading, setIsLoading] = useState(true);
   const { token, isAuthenticated } = useAuth();
   const navigate = useNavigate();
+  const API_BASE = "https://skill-hub-1h3a.onrender.com";
+
+  fetch(`${API_BASE}/api/users`)
+  .then(res => res.json())
+  .then(data => console.log(data));
 
   useEffect(() => {
     const fetchData = async () => {
