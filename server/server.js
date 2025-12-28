@@ -14,7 +14,10 @@ dotenv.config();
 // Connect to database
 connectDB();
 
-const app = express();
+app.use(cors({
+  origin: "https://skill-e0g109ie6-sudhanvasm-cs24s-projects.vercel.app/",
+  credentials: true
+}));
 
 // Enable CORS (Cross-Origin Resource Sharing)
 // This is crucial to allow your React frontend (on localhost:3000)
