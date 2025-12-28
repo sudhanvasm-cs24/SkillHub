@@ -962,8 +962,8 @@ function Layout() {
       try {
         const headers = token ? { 'Authorization': `Bearer ${token}` } : {};
         const [r, l] = await Promise.all([
-          fetch('http://localhost:5000/api/content/roadmaps', { headers }),
-          fetch('http://localhost:5000/api/content/learning', { headers })
+          fetch(`${API_BASE}/api/content/roadmaps`, { headers }),
+          fetch(`${API_BASE}/api/content/learning`, { headers })
         ]);
         const roadmapsData = r.ok ? await r.json() : [];
         const learningData = l.ok ? await l.json() : [];
@@ -988,7 +988,7 @@ function Layout() {
         return;
       }
       try {
-        const res = await fetch('http://localhost:5000/api/progress', {
+        const res = await fetch(`${API_BASE}/api/progress`, {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         if (res.ok) {
@@ -1020,7 +1020,7 @@ function Layout() {
     });
 
     try {
-      const res = await fetch('http://localhost:5000/api/progress/toggle', {
+      const res = await fetch(`${API_BASE}api/progress/toggle`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
         body: JSON.stringify({ stepId })
