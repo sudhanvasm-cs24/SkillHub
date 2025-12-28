@@ -22,7 +22,6 @@ app.use(cors({
 // Enable CORS (Cross-Origin Resource Sharing)
 // This is crucial to allow your React frontend (on localhost:3000)
 // to talk to your backend (on localhost:5000)
-app.use(cors());
 
 // Body parser middleware
 // This allows us to accept JSON data in the request body
