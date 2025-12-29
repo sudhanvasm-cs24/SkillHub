@@ -698,8 +698,6 @@ function ProfilePage() {
     try {
       res = await changePassword(pwdForm.currentPassword, pwdForm.newPassword);
       console.log('changePassword result:', res);
-      pwdForm.currentPassword,
-      pwdForm.newPassword
     } catch (err) {
       // Shouldn't normally happen because changePassword catches, but guard anyway
       console.error('changePassword threw:', err);
@@ -917,7 +915,7 @@ function AboutPage() {
               {n: "MongoDB", i: Database, c: "text-green-500/100", b: "bg-green-500/100"}, {n: "Express.js", i: Server}, 
               {n: "React.js", i: CodeXml}, {n: "Node.js", i: Cpu},
               {n: "Tailwind CSS", i: Code}, {n: "React Router", i: Map},
-              {n: "Lucide", i: Star}, {n: "Vite", i: Zap}
+              {n: "Lucide", i: Star}, {n: "Create React App", i: Zap}
             ].map((t, i) => (
               <div key={i} className="bg-gray-800 p-4 rounded-xl flex items-center justify-center gap-3 border border-gray-700 hover:border-blue-500 transition-all group">
                 <t.i className={`h-5 w-5 text-gray-500 group-hover:text-blue-400 transition-colors`}/>
