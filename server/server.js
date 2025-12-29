@@ -17,7 +17,7 @@ const app = express();
 connectDB();
 
 const allowedOrigins = [
-  "https://skillhub-wheat.vercel.app",
+  "https://skillhub-fwd.vercel.app",
   "http://localhost:3000"
 ];
 
