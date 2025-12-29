@@ -698,6 +698,8 @@ function ProfilePage() {
     try {
       res = await changePassword(pwdForm.currentPassword, pwdForm.newPassword);
       console.log('changePassword result:', res);
+      pwdForm.currentPassword,
+      pwdForm.newPassword
     } catch (err) {
       // Shouldn't normally happen because changePassword catches, but guard anyway
       console.error('changePassword threw:', err);
@@ -719,13 +721,19 @@ function ProfilePage() {
 
     // If server indicates success
     if (res.success) {
-      setMsg({ type: 'success', text: res.message || 'Password changed successfully.' });
-      setPwdError(null);
-      setShowPassword(false);
-      setPwdForm({ currentPassword: '', newPassword: '', confirmPassword: '' });
-      setLoadingAction(false);
-      return;
-    }
+    setMsg({
+      type: 'success',
+      text: res.message || 'Password updated successfully.'
+    });
+    setPwdError(null);
+    setShowPassword(false);
+    setPwdForm({
+      currentPassword: '',
+      newPassword: '',
+      confirmPassword: ''
+    });
+    return;
+  }
 
     // Otherwise map known cases to a clear inline message
     let errText = res.error || 'Failed to change password.';
